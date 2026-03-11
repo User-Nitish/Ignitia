@@ -1,0 +1,11 @@
+node_modules/
+.env
+uploads/
+err.txt
+err2.txt
+err3.txt
+error.log
+startup_err.txt
+.DS_Store
+dist/
+build/
