@@ -1,7 +1,5 @@
 import fs from "fs/promises";
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const pdf = require("pdf-parse");
+import pdf from 'pdf-parse';
 
 /**
  * Extract text from PDF file
