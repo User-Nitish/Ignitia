@@ -56,9 +56,10 @@ app.use(errorHandler);
 
 // 404 handler
 app.use((req, res) => {
+  console.log(`[404] Route not found: ${req.method} ${req.url}`);
   res.status(404).json({
     success: false,
-    error: "Route not found",
+    error: `Route not found: ${req.method} ${req.url}`,
     statusCode: 404,
   });
 });
