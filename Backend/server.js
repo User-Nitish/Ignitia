@@ -39,7 +39,17 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Static folder for uploads
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", (req, res, next) => {
+  const fullPath = path.join(__dirname, "uploads", req.url);
+  import('fs').then(fs => {
+    if (fs.existsSync(fullPath)) {
+      console.log(`[Static] Serving file: ${fullPath}`);
+    } else {
+      console.warn(`[Static] File not found: ${fullPath}`);
+    }
+  }).catch(() => {});
+  next();
+}, express.static(path.join(__dirname, "uploads")));
 
 // Routes
 console.log("Registering routes...");
