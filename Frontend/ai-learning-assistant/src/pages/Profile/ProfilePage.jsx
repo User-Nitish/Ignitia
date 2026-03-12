@@ -122,7 +122,7 @@ const ProfilePage = () => {
             <label className="block text-sm font-medium text-slate-500 mb-1.5">
               Current Password
             </label>
-            <div className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-100 transition-all">
+            <div className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
               <div className="text-slate-400 flex-shrink-0">
                 <Lock className="w-4 h-4" />
               </div>
@@ -142,7 +142,7 @@ const ProfilePage = () => {
             <label className="block text-sm font-medium text-slate-500 mb-1.5">
               New Password
             </label>
-            <div className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-100 transition-all">
+            <div className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
               <div className="text-slate-400 flex-shrink-0">
                 <Lock className="w-4 h-4" />
               </div>
@@ -162,7 +162,7 @@ const ProfilePage = () => {
             <label className="block text-sm font-medium text-slate-500 mb-1.5">
               Confirm New Password
             </label>
-            <div className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-100 transition-all">
+            <div className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
               <div className="text-slate-400 flex-shrink-0">
                 <Lock className="w-4 h-4" />
               </div>
@@ -182,7 +182,7 @@ const ProfilePage = () => {
             <Button
               type="submit"
               disabled={passwordLoading}
-              className="flex items-center gap-2 px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-emerald-200 transition-all duration-200"
+              className="flex items-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl shadow-md shadow-blue-500/20 transition-all duration-200 hover:-translate-y-0.5"
             >
               {passwordLoading ? "Updating..." : "Change Password"}
             </Button>

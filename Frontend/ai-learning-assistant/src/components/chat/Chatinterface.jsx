@@ -93,14 +93,14 @@ const ChatInterface = () => {
                 className={`flex items-start gap-3 my-6 ${isUser ? "flex-row-reverse" : "flex-row"}`}
             >
                 {!isUser && (
-                    <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0 border border-emerald-200">
-                        <Sparkles className="w-4 h-4 text-emerald-600" strokeWidth={2.5} />
+                    <div className="w-8 h-8 rounded-lg bg-cyan-100 flex items-center justify-center flex-shrink-0 border border-cyan-200">
+                        <Sparkles className="w-4 h-4 text-blue-600" strokeWidth={2.5} />
                     </div>
                 )}
 
                 <div
                     className={`group relative max-w-[85%] md:max-w-[75%] p-4 rounded-2xl shadow-sm transition-all duration-200 ${isUser
-                        ? "bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-tr-none"
+                        ? "bg-gradient-to-br from-blue-600 to-cyan-500 text-white rounded-tr-none shadow-blue-500/20"
                         : "bg-white border border-slate-200/80 text-slate-800 rounded-tl-none hover:border-slate-300"
                         }`}
                 >
@@ -113,7 +113,7 @@ const ChatInterface = () => {
                     )}
 
                     {isUser && (
-                        <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-teal-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-teal-700 shadow-sm">
+                        <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-white/20 border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">
                             {user?.username?.charAt(0).toUpperCase() || "U"}
                         </div>
                     )}
@@ -128,8 +128,8 @@ const ChatInterface = () => {
     if (initialLoading) {
         return (
             <div className="flex flex-col h-[70vh] bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl items-center justify-center shadow-2xl shadow-slate-200/50">
-                <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center animate-pulse">
-                    <MessageSquare className="w-8 h-8 text-emerald-600" strokeWidth={2} />
+                <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center animate-pulse">
+                    <MessageSquare className="w-8 h-8 text-blue-600" strokeWidth={2} />
                 </div>
                 <div className="mt-6 flex flex-col items-center">
                     <Spinner />
@@ -145,8 +145,8 @@ const ChatInterface = () => {
             <div className="flex-1 p-6 overflow-y-auto bg-gradient-to-br from-slate-50/80 via-white to-slate-50/80 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
                 {history.length === 0 && (
                     <div className="flex flex-col items-center justify-center h-full text-center p-8 space-y-4">
-                        <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-50 to-teal-50 flex items-center justify-center shadow-inner">
-                            <Sparkles className="w-10 h-10 text-emerald-500/80" strokeWidth={1.5} />
+                        <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center shadow-inner">
+                            <Sparkles className="w-10 h-10 text-blue-500/80" strokeWidth={1.5} />
                         </div>
                         <div className="space-y-2">
                             <h3 className="text-xl font-bold text-slate-800">Knowledge Assistant Ready</h3>
@@ -163,14 +163,14 @@ const ChatInterface = () => {
 
                 {loading && (
                     <div className="flex items-start gap-3 my-6">
-                        <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0 animate-bounce">
-                            <Sparkles className="w-4 h-4 text-emerald-600" />
+                        <div className="w-8 h-8 rounded-lg bg-cyan-100 flex items-center justify-center flex-shrink-0 animate-bounce cursor-default">
+                            <Sparkles className="w-4 h-4 text-blue-600" />
                         </div>
                         <div className="px-5 py-4 rounded-2xl rounded-tl-none bg-white border border-slate-200/80 shadow-sm">
                             <div className="flex gap-1.5 item-center h-4">
-                                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                                <span className="w-2 h-2 bg-teal-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                                <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+                                <span className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+                                <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
                             </div>
                         </div>
                     </div>
@@ -186,14 +186,14 @@ const ChatInterface = () => {
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder="Ask a follow-up question ..."
-                            className="w-full h-14 pl-5 pr-14 bg-slate-50 border-2 border-slate-100 rounded-2xl text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-emerald-400/50 focus:bg-white transition-all duration-300 text-sm shadow-sm"
+                            className="w-full h-14 pl-5 pr-14 bg-slate-50 border-2 border-slate-100 rounded-2xl text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-blue-400/50 focus:bg-white transition-all duration-300 text-sm shadow-sm"
                             disabled={loading}
                         />
                         <div className="absolute right-2 top-2">
                             <button
                                 type="submit"
                                 disabled={loading || !message.trim()}
-                                className="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/30 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:scale-100 transition-all duration-200"
+                                className="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/30 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:scale-100 transition-all duration-200"
                             >
                                 <Send className="w-4 h-4 ml-0.5" strokeWidth={2.5} />
                             </button>

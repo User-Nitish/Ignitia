@@ -133,7 +133,6 @@ const QuizTakePage = () => {
                 </div>
             </div>
 
-            {/* Question Card */}
             <div className="bg-white/80 backdrop-blur-xl border border-emerald-100 rounded-[2.5rem] p-8 md:p-10 shadow-2xl shadow-emerald-100/20 relative overflow-hidden ring-1 ring-white/50">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50/50 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl -z-10" />
 

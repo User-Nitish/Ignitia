@@ -254,14 +254,14 @@ const QuizResultPage = () => {
 
                   {/* Explanation Block */}
                   {result.explanation && (
-                    <div className={`mt-8 p-6 rounded-3xl border ${isCorrect ? "bg-emerald-50/50 border-emerald-100" : "bg-blue-50/50 border-blue-100"}`}>
+                    <div className={`mt-8 p-6 rounded-3xl border ${isCorrect ? "bg-emerald-50/50 border-emerald-100" : "bg-emerald-50/50 border-emerald-100"}`}>
                       <div className="flex items-center gap-3 mb-3">
-                        <div className={`p-2 rounded-xl ${isCorrect ? "bg-emerald-100 text-emerald-600" : "bg-blue-100 text-blue-600"}`}>
+                        <div className={`p-2 rounded-xl ${isCorrect ? "bg-emerald-100 text-emerald-600" : "bg-emerald-100 text-emerald-600"}`}>
                           <BookOpen size={18} strokeWidth={2.5} />
                         </div>
-                        <span className={`text-xs font-black uppercase tracking-widest ${isCorrect ? "text-emerald-700" : "text-blue-700"}`}>Explanation</span>
+                        <span className={`text-xs font-black uppercase tracking-widest ${isCorrect ? "text-emerald-700" : "text-emerald-700"}`}>Explanation</span>
                       </div>
-                      <p className={`text-sm font-medium leading-relaxed ${isCorrect ? "text-emerald-800/80" : "text-blue-800/80"}`}>
+                      <p className={`text-sm font-medium leading-relaxed ${isCorrect ? "text-emerald-800/80" : "text-emerald-800/80"}`}>
                         {result.explanation}
                       </p>
                     </div>

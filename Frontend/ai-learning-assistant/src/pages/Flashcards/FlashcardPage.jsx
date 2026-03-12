@@ -156,7 +156,7 @@ const FlashcardPage = () => {
           </Button>
 
           <div className="flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 rounded-xl shadow-sm">
-            <span className="text-base font-black text-emerald-600">{currentCardIndex + 1}</span>
+            <span className="text-base font-black text-blue-600">{currentCardIndex + 1}</span>
             <span className="text-slate-400 font-medium">/</span>
             <span className="text-base font-bold text-slate-600">{flashcards.length}</span>
           </div>
@@ -178,7 +178,7 @@ const FlashcardPage = () => {
               key={index}
               onClick={() => setCurrentCardIndex(index)}
               className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentCardIndex
-                ? "bg-emerald-500 scale-125"
+                ? "bg-blue-500 scale-125"
                 : "bg-slate-200 hover:bg-slate-300"
                 }`}
             />
@@ -194,7 +194,7 @@ const FlashcardPage = () => {
       <div>
         <Link
           to={`/documents/${documentId}`}
-          className="group inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-emerald-700 transition-colors"
+          className="group inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-blue-600 transition-colors"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           Back to Document
@@ -218,7 +218,7 @@ const FlashcardPage = () => {
             <Button
               onClick={handleGenerateFlashcards}
               disabled={generating}
-              className="flex items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-6 font-bold shadow-lg shadow-emerald-200 transition-all"
+              className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-6 font-bold shadow-lg shadow-blue-200 transition-all"
             >
               {generating ? (
                 <div className="flex items-center gap-2">

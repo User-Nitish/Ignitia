@@ -14,14 +14,14 @@ const MarkdownRenderer = ({ content }) => {
                     h3: ({ node, ...props }) => <h3 className="text-md font-bold mt-3 mb-2" {...props} />,
                     h4: ({ node, ...props }) => <h4 className="text-base font-semibold mt-3 mb-1 text-slate-800" {...props} />,
                     p: ({ node, ...props }) => <p className="mb-4 last:mb-0 leading-relaxed text-slate-700" {...props} />,
-                    a: ({ node, ...props }) => <a className="text-emerald-600 hover:text-emerald-700 underline underline-offset-2 transition-colors font-medium" {...props} />,
+                    a: ({ node, ...props }) => <a className="text-indigo-600 hover:text-indigo-700 underline underline-offset-2 transition-colors font-medium" {...props} />,
                     ul: ({ node, ...props }) => <ul className="list-disc list-inside mb-4 space-y-1 text-slate-700" {...props} />,
                     ol: ({ node, ...props }) => <ol className="list-decimal list-inside mb-4 space-y-1 text-slate-700" {...props} />,
                     li: ({ node, ...props }) => <li className="mb-1" {...props} />,
                     strong: ({ node, ...props }) => <strong className="font-bold text-slate-900" {...props} />,
                     em: ({ node, ...props }) => <em className="italic text-slate-600" {...props} />,
                     blockquote: ({ node, ...props }) => (
-                        <blockquote className="border-l-4 border-emerald-200 bg-emerald-50/30 px-4 py-2 italic text-slate-600 my-6 rounded-r-lg" {...props} />
+                        <blockquote className="border-l-4 border-indigo-200 bg-indigo-50/30 px-4 py-2 italic text-slate-600 my-6 rounded-r-lg" {...props} />
                     ),
                     code: ({ node, inline, className, children, ...props }) => {
                         const match = /language-(\w+)/.exec(className || "");
@@ -38,7 +38,7 @@ const MarkdownRenderer = ({ content }) => {
                                 </SyntaxHighlighter>
                             </div>
                         ) : (
-                            <code className="bg-slate-100 px-1.5 py-0.5 rounded-md font-mono text-xs text-emerald-700 font-semibold" {...props}>
+                            <code className="bg-slate-100 px-1.5 py-0.5 rounded-md font-mono text-xs text-indigo-700 font-semibold" {...props}>
                                 {children}
                             </code>
                         );

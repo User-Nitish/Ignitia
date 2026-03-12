@@ -33,13 +33,13 @@ const DocumentCard = ({ document, onDelete }) => {
 
     return (
         <div
-            className="group relative bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-2xl p-5 hover:border-emerald-200/60 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 flex flex-col justify-between cursor-pointer hover:-translate-y-1"
+            className="group relative bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-2xl p-5 hover:border-blue-200/60 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 flex flex-col justify-between cursor-pointer hover:-translate-y-1"
             onClick={handleNavigate}
         >
             {/* Header Section */}
             <div>
                 <div className="flex items-start justify-between gap-3 mb-4">
-                    <div className="shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/25 group-hover:scale-110 transition-transform duration-300">
+                    <div className="shrink-0 w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300">
                         <FileText className="w-6 h-6 text-white" strokeWidth={2} />
                     </div>
                     <button
@@ -70,7 +70,7 @@ const DocumentCard = ({ document, onDelete }) => {
                 {/* Stats Section */}
                 <div className="flex items-center gap-3">
                     {document.flashcardCount !== undefined && (
-                        <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-purple-50 text-purple-700 rounded-lg text-xs font-medium">
+                        <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-rose-50 text-rose-700 rounded-lg text-xs font-medium">
                             <BookOpen className="w-3.5 h-3.5" strokeWidth={2} />
                             <span>{document.flashcardCount} Flashcards</span>
                         </div>
@@ -94,7 +94,7 @@ const DocumentCard = ({ document, onDelete }) => {
             </div>
 
             {/* Hover Indicator */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-emerald-500 group-hover:w-1/2 transition-all duration-300 rounded-full opacity-50" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-blue-500 group-hover:w-1/2 transition-all duration-300 rounded-full opacity-50" />
         </div>
     );
 };

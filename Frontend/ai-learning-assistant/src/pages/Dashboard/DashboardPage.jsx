@@ -33,7 +33,7 @@ const DashboardPage = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center ">
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl group relative bg-linear-to-r from-emerald-500 to-teal-500 hover:to-teal-600 active:scale-[0.98] text-white shadow-inner mb-6 transition-all">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl group relative bg-blue-600 text-white shadow-md border border-blue-700 mb-6 transition-all">
             <TrendingUp className="w-8 h-8" />
           </div>
           <p className="text-slate-600 text-sm">No dashboard data available.</p>
@@ -47,22 +47,25 @@ const DashboardPage = () => {
       label: "Total Documents",
       value: dashboardData.overview.totalDocuments,
       icon: FileText,
-      gradient: "from-blue-400 to-cyan-500",
-      shadowColor: "shadow-blue-500/25"
+      background: "bg-blue-50",
+      textColor: "text-blue-600",
+      borderColor: "group-hover:border-blue-200"
     },
     {
       label: "Total Questions",
       value: dashboardData.overview.totalQuestions,
       icon: BookOpen,
-      gradient: "from-purple-400 to-pink-500",
-      shadowColor: "shadow-purple-500/25",
+      background: "bg-purple-50",
+      textColor: "text-purple-600",
+      borderColor: "group-hover:border-purple-200",
     },
     {
       label: "Total Quizzes",
       value: dashboardData.overview.totalQuizzes,
       icon: BrainCircuit,
-      gradient: "from-emerald-400 to-teal-500",
-      shadowColor: "shadow-orange-500/25",
+      background: "bg-emerald-50",
+      textColor: "text-emerald-600",
+      borderColor: "group-hover:border-emerald-200",
     }
   ];
 
@@ -84,7 +87,7 @@ const DashboardPage = () => {
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 hover:shadow-md transition-all duration-300 overflow-hidden"
+              className={`group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 hover:shadow-md transition-all duration-300 overflow-hidden ${stat.borderColor}`}
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -95,7 +98,7 @@ const DashboardPage = () => {
                     {stat.value}
                   </p>
                 </div>
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.gradient} shadow-lg ${stat.shadowColor} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-12 h-12 rounded-xl border border-transparent ${stat.background} ${stat.textColor} flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
                   <stat.icon size={24} strokeWidth={2.5} />
                 </div>
               </div>
@@ -106,7 +109,7 @@ const DashboardPage = () => {
         {/* Recent Activity Section */}
         <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200/60">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
               <Clock size={20} strokeWidth={2.5} />
             </div>
             <h3 className="text-xl font-bold text-slate-900">Recent Activity</h3>
@@ -141,8 +144,8 @@ const DashboardPage = () => {
                     <div className="flex items-center gap-4">
                       <div
                         className={`w-2.5 h-2.5 rounded-full ${activity.type === "document"
-                          ? "bg-gradient-to-r from-blue-400 to-cyan-500"
-                          : "bg-gradient-to-r from-emerald-400 to-teal-500"
+                          ? "bg-blue-500"
+                          : "bg-emerald-500"
                           }`}
                       ></div>
                       <div>
@@ -163,7 +166,7 @@ const DashboardPage = () => {
                     {activity.link && (
                       <a
                         href={activity.link}
-                        className="opacity-0 group-hover:opacity-100 px-4 py-2 text-xs font-bold text-emerald-600 bg-emerald-50 rounded-lg hover:bg-emerald-100 transition-all duration-200"
+                        className="opacity-0 group-hover:opacity-100 px-4 py-2 text-xs font-bold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-200"
                       >
                         View Details
                       </a>

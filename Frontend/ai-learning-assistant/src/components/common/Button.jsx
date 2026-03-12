@@ -14,11 +14,11 @@ const Button = ({
 
     const variantStyles = {
         primary:
-            "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0",
+            "bg-blue-600 border border-blue-600 text-white shadow-md shadow-blue-500/20 hover:bg-blue-700 hover:border-blue-700 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden before:absolute before:inset-0 before:bg-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity",
         secondary:
-            "bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 shadow-sm hover:shadow-md hover:bg-slate-200 hover:-translate-y-0.5 active:translate-y-0",
+            "bg-slate-100/80 border border-slate-200 text-slate-700 shadow-sm hover:shadow-md hover:bg-slate-200 hover:border-slate-300 hover:-translate-y-0.5 active:translate-y-0",
         outline:
-            "border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-300 hover:-translate-y-0.5 active:translate-y-0",
+            "border-2 border-slate-200 text-slate-700 bg-white hover:bg-slate-50 hover:border-blue-300 hover:text-blue-600 hover:-translate-y-0.5 active:translate-y-0",
     };
 
     const sizeStyles = {

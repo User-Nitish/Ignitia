@@ -201,7 +201,7 @@ const DocumentListPage = () => {
                   value={uploadTitle}
                   onChange={(e) => setUploadTitle(e.target.value)}
                   required
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-medium text-slate-800"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium text-slate-800"
                   placeholder="e.g., React Interview Prep"
                 />
               </div>
@@ -213,7 +213,7 @@ const DocumentListPage = () => {
                 </label>
                 <div
                   onClick={() => document.getElementById('file-upload').click()}
-                  className="relative border-2 border-dashed border-slate-200 rounded-2xl p-8 transition-all hover:bg-emerald-50 hover:border-emerald-200 group cursor-pointer text-center"
+                  className="relative border-2 border-dashed border-slate-200 rounded-2xl p-8 transition-all hover:bg-blue-50 hover:border-blue-200 group cursor-pointer text-center"
                 >
                   <input
                     id="file-upload"
@@ -223,13 +223,13 @@ const DocumentListPage = () => {
                     accept=".pdf"
                   />
                   <div className="flex flex-col items-center gap-3">
-                    <div className="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Upload className="w-6 h-6" strokeWidth={2} />
                     </div>
                     <div className="space-y-1">
                       <p className="text-sm font-medium text-slate-700">
                         {uploadFile ? (
-                          <span className="text-emerald-600 truncate max-w-[250px] block">
+                          <span className="text-blue-600 truncate max-w-[250px] block">
                             {uploadFile.name}
                           </span>
                         ) : (
@@ -255,7 +255,7 @@ const DocumentListPage = () => {
                 <button
                   type="submit"
                   disabled={uploading}
-                  className="flex-[2] px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl shadow-lg shadow-emerald-500/25 transition-all hover:opacity-90 active:scale-95 disabled:opacity-50"
+                  className="flex-[2] px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 border border-blue-600 rounded-xl shadow-md shadow-blue-500/20 transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50"
                 >
                   {uploading ? (
                     <span className="flex items-center justify-center gap-2">

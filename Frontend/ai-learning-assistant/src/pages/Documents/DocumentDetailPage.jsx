@@ -74,7 +74,7 @@ const DocumentDetailPage = () => {
               href={pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs font-bold text-emerald-600 hover:text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg transition-colors"
+              className="flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-700 bg-blue-50 px-3 py-1.5 rounded-lg transition-colors"
             >
               <ExternalLink size={14} /> Open in new tab
             </a>
@@ -129,7 +129,7 @@ const DocumentDetailPage = () => {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
         <h2 className="text-xl font-bold text-slate-800 mb-2">Document Not Found</h2>
-        <Link to="/documents" className="text-emerald-600 font-medium hover:underline">
+        <Link to="/documents" className="text-blue-600 font-medium hover:underline">
           Return to Documents
         </Link>
       </div>
@@ -141,7 +141,7 @@ const DocumentDetailPage = () => {
       <div className="mb-6 shrink-0">
         <Link
           to="/documents"
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold text-slate-600 hover:text-emerald-600 bg-white border border-slate-200 rounded-xl hover:border-emerald-200 shadow-sm transition-all duration-200 group"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold text-slate-600 hover:text-blue-600 bg-white border border-slate-200 rounded-xl hover:border-blue-200 shadow-sm transition-all duration-200 group"
         >
           <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
           Back to Documents

@@ -54,7 +54,7 @@ const AIActions = () => {
             {/* Header */}
             <div className="px-8 py-6 border-b border-slate-200/60 bg-white">
                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#00b894] to-[#00a884] flex items-center justify-center shadow-lg shadow-emerald-200/50 text-white">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/50 text-white">
                         <Sparkles className="w-6 h-6" strokeWidth={2} />
                     </div>
                     <div>
@@ -66,11 +66,11 @@ const AIActions = () => {
 
             <div className="p-8 space-y-8">
                 {/* Generate Summary */}
-                <div className="group relative p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:border-emerald-200 hover:bg-white transition-all duration-300">
+                <div className="group relative p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:border-blue-200 hover:bg-white transition-all duration-300">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div className="space-y-2">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform duration-300">
+                                <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform duration-300">
                                     <BookOpen className="w-5 h-5" strokeWidth={2.5} />
                                 </div>
                                 <h4 className="text-lg font-bold text-slate-800">Generate Summary</h4>
@@ -82,7 +82,7 @@ const AIActions = () => {
                         <button
                             onClick={handleGenerateSummary}
                             disabled={loadingAction === "summary"}
-                            className="relative px-6 py-3 bg-gradient-to-r from-[#00b894] to-[#00a884] hover:shadow-emerald-300 disabled:from-slate-300 disabled:to-slate-300 text-white font-bold rounded-xl shadow-lg shadow-emerald-200/50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center min-w-[140px]"
+                            className="relative px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-blue-500/50 disabled:from-slate-300 disabled:to-slate-300 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center min-w-[140px]"
                         >
                             {loadingAction === "summary" ? (
                                 <span className="flex items-center gap-2">
@@ -96,12 +96,11 @@ const AIActions = () => {
                     </div>
                 </div>
 
-                {/* Explain Concept */}
-                <div className="group relative p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:border-emerald-200 hover:bg-white transition-all duration-300">
+                <div className="group relative p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:border-rose-200 hover:bg-white transition-all duration-300">
                     <form onSubmit={handleExplainConcept} className="space-y-6">
                         <div className="space-y-2">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-orange-400 group-hover:scale-110 transition-transform duration-300">
+                                <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-orange-500 group-hover:scale-110 transition-transform duration-300">
                                     <Lightbulb className="w-5 h-5" strokeWidth={2.5} />
                                 </div>
                                 <h4 className="text-lg font-bold text-slate-800">Explain a Concept</h4>
@@ -116,13 +115,13 @@ const AIActions = () => {
                                 type="text"
                                 value={concept}
                                 onChange={(e) => setConcept(e.target.value)}
-                                className="flex-1 px-5 py-3 bg-white border border-emerald-500/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all placeholder:text-slate-300 text-slate-700 font-medium"
+                                className="flex-1 px-5 py-3 bg-white border border-rose-500/30 rounded-xl focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all placeholder:text-slate-300 text-slate-700 font-medium"
                                 placeholder="e.g. 'React Hooks'"
                             />
                             <button
                                 type="submit"
                                 disabled={loadingAction === "explain"}
-                                className="px-8 py-3 bg-gradient-to-r from-[#55efc4] to-[#00b894] hover:shadow-emerald-200 disabled:from-slate-300 disabled:to-slate-300 text-white font-bold rounded-xl shadow-lg shadow-emerald-200/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center min-w-[120px]"
+                                className="px-8 py-3 bg-gradient-to-r from-rose-500 to-orange-500 hover:shadow-rose-500/50 disabled:from-slate-300 disabled:to-slate-300 text-white font-bold rounded-xl shadow-lg shadow-rose-500/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center min-w-[120px]"
                             >
                                 {loadingAction === "explain" ? (
                                     <span className="flex items-center gap-2">
@@ -144,7 +143,7 @@ const AIActions = () => {
                 onClose={() => setIsModalOpen(false)}
                 title={modalTitle}
             >
-                <div className="max-h-[60vh] overflow-y-auto prose prose-emerald prose-slate max-w-none scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent pr-4">
+                <div className="max-h-[60vh] overflow-y-auto prose prose-indigo prose-slate max-w-none scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent pr-4">
                     <MarkdownRenderer content={modalContent} />
                 </div>
             </Modal>

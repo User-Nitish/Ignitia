@@ -112,7 +112,7 @@ const QuizManager = ({ documentId }) => {
                 <h2 className="text-lg font-bold text-slate-800 px-2">Knowledge Checks</h2>
                 <Button
                     onClick={() => setIsGenerateModalOpen(true)}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-lg shadow-emerald-200 transition-all duration-200"
+                    className="bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl shadow-lg shadow-emerald-200 transition-all duration-200"
                 >
                     <Plus size={18} className="mr-1" />
                     New Quiz
@@ -156,7 +156,7 @@ const QuizManager = ({ documentId }) => {
                         <Button
                             type="submit"
                             disabled={generating}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl px-8 shadow-lg shadow-emerald-200"
+                            className="bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl px-8 shadow-lg shadow-emerald-200"
                         >
                             {generating ? (
                                 <div className="flex items-center gap-2">

@@ -148,7 +148,7 @@ const FlashcardManager = ({ documentId }) => {
         {/* Back Button */}
         <button
           onClick={() => setSelectedSet(null)}
-          className="group inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors duration-200"
+          className="group inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors duration-200"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-200" strokeWidth={2} />
           Back to Sets
@@ -168,14 +168,14 @@ const FlashcardManager = ({ documentId }) => {
             <button
               onClick={handlePrevCard}
               disabled={selectedSet.cards.length <= 1}
-              className="p-3 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-emerald-600 hover:border-emerald-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
+              className="p-3 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
               title="Previous Card"
             >
               <ChevronLeft className="w-5 h-5" strokeWidth={2.5} />
             </button>
 
             <div className="flex items-center gap-1.5 font-semibold text-slate-700">
-              <span className="text-emerald-600">{currentCardIndex + 1}</span>
+              <span className="text-blue-600">{currentCardIndex + 1}</span>
               <span className="text-slate-300">/</span>
               <span>{selectedSet.cards.length}</span>
             </div>
@@ -183,7 +183,7 @@ const FlashcardManager = ({ documentId }) => {
             <button
               onClick={handleNextCard}
               disabled={selectedSet.cards.length <= 1}
-              className="p-3 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-emerald-600 hover:border-emerald-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
+              className="p-3 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
               title="Next Card"
             >
               <ChevronRight className="w-5 h-5" strokeWidth={2.5} />
@@ -206,8 +206,8 @@ const FlashcardManager = ({ documentId }) => {
     if (flashcardSets.length === 0) {
       return (
         <div className="flex flex-col items-center justify-center py-16 px-6">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-emerald-100 to-teal-100 mb-6">
-            <Brain className="w-8 h-8 text-emerald-600" strokeWidth={2} />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-blue-100 to-cyan-100 mb-6">
+            <Brain className="w-8 h-8 text-blue-600" strokeWidth={2} />
           </div>
           <h3 className="text-xl font-semibold text-slate-900 mb-2">
             No Flashcards Yet
@@ -218,7 +218,7 @@ const FlashcardManager = ({ documentId }) => {
           <button
             onClick={handleGenerateFlashcards}
             disabled={generating}
-            className={`group relative inline-flex items-center gap-3 px-8 h-14 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-emerald-200/50 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden`}
+            className={`group relative inline-flex items-center gap-3 px-8 h-14 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-blue-200/50 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden`}
           >
             {generating ? (
               <>
@@ -227,7 +227,7 @@ const FlashcardManager = ({ documentId }) => {
               </>
             ) : (
               <>
-                <Sparkles className="w-5 h-5 text-emerald-100 group-hover:rotate-12 transition-transform duration-300" strokeWidth={2} />
+                <Sparkles className="w-5 h-5 text-blue-100 group-hover:rotate-12 transition-transform duration-300" strokeWidth={2} />
                 <span>Generate Flashcards</span>
               </>
             )}
@@ -252,11 +252,11 @@ const FlashcardManager = ({ documentId }) => {
           <button
             onClick={handleGenerateFlashcards}
             disabled={generating}
-            className="group inline-flex items-center gap-2.5 px-6 h-12 bg-emerald-50 text-emerald-600 font-bold rounded-xl border border-emerald-100 hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm"
+            className="group inline-flex items-center gap-2.5 px-6 h-12 bg-blue-50 text-blue-600 font-bold rounded-xl border border-blue-100 hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-sm"
           >
             {generating ? (
               <>
-                <div className="w-4 h-4 border-2 border-emerald-600/30 border-t-emerald-600 rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-blue-600/30 border-t-blue-600 rounded-full animate-spin" />
                 <span>Generating...</span>
               </>
             ) : (
@@ -274,7 +274,7 @@ const FlashcardManager = ({ documentId }) => {
             <div
               key={set._id}
               onClick={() => handleSelectSet(set)}
-              className="group relative bg-white border border-slate-200 hover:border-emerald-300 rounded-[2rem] p-6 cursor-pointer transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-100/50 flex flex-col gap-6"
+              className="group relative bg-white border border-slate-200 hover:border-blue-300 rounded-[2rem] p-6 cursor-pointer transition-all duration-300 hover:shadow-2xl hover:shadow-blue-100/50 flex flex-col gap-6"
             >
               {/* Delete Button */}
               <button
@@ -287,7 +287,7 @@ const FlashcardManager = ({ documentId }) => {
 
               {/* Icon and Title */}
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300 shadow-sm">
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-colors duration-300 shadow-sm">
                   <Brain className="w-7 h-7" strokeWidth={2} />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -305,7 +305,7 @@ const FlashcardManager = ({ documentId }) => {
                 <div className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold">
                   {set.cards.length} {set.cards.length === 1 ? "card" : "cards"}
                 </div>
-                <div className="text-emerald-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+                <div className="text-blue-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
                   <ChevronRight className="w-5 h-5" strokeWidth={2.5} />
                 </div>
               </div>

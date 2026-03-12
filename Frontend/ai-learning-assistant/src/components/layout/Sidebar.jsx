@@ -44,11 +44,11 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                 {/* Logo and Close button */}
                 <div className="flex items-center justify-between h-16 px-6 border-b border-slate-200/60 shrink-0">
                     <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 shadow-md shadow-emerald-200">
+                        <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 shadow-md shadow-blue-200">
                             <BrainCircuit className="text-white" size={20} strokeWidth={2.5} />
                         </div>
-                        <h1 className="text-sm font-bold text-slate-900 tracking-tight">
-                            AI Learning Assistant
+                        <h1 className="text-2xl font-black text-slate-800 tracking-[-0.03em] font-display">
+                            Ignitia
                         </h1>
                     </div>
                     <button
@@ -67,9 +67,9 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                             to={link.to}
                             onClick={() => isSidebarOpen && toggleSidebar()}
                             className={({ isActive }) =>
-                                `group flex items-center gap-3 px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 ${isActive
-                                    ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25"
-                                    : "text-slate-600 hover:bg-slate-50 hover:text-emerald-600"
+                                `group flex items-center gap-3 px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${isActive
+                                    ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/25 scale-[1.02]"
+                                    : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
                                 }`
                             }
                         >
