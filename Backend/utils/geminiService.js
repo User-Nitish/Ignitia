@@ -10,18 +10,20 @@ if (!process.env.GEMINI_API_KEY) {
   process.exit(1);
 }
 
-// Define available models in order of preference
 const MODEL_NAMES = [
-  "gemini-2.5-flash",
-  "gemini-2.0-flash",
   "gemini-1.5-flash",
-  "gemini-1.5-flash-latest",
+  "gemini-1.5-flash-8b",
   "gemini-1.5-pro",
-  "gemini-pro"
+  "gemini-1.0-pro",
+  "gemini-2.0-flash-exp",
+  "gemini-2.0-flash"
 ];
 
 // Cache the working model name to avoid repeated failures
 let workingModelName = null;
+
+// Helper to delay execution
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 /**
  * Helper to call Gemini with fallback logic
@@ -51,6 +53,12 @@ const callGeminiWithFallback = async (prompt) => {
     } catch (error) {
       console.warn(`[Gemini] Model ${modelName} failed: ${error.message}`);
       lastError = error;
+      
+      // If it's a rate limit error, wait a bit before trying the next model
+      if (error.message.includes('429') || error.message.includes('quota')) {
+        console.log(`[Gemini] Rate limit hit for ${modelName}, waiting 2s before fallback...`);
+        await sleep(2000);
+      }
     }
   }
 

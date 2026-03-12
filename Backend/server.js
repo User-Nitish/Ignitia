@@ -38,6 +38,15 @@ app.use(
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
+// Health check / Root route
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Ignitia API is up and running",
+    version: "1.0.0"
+  });
+});
+
 // Static folder for uploads
 app.use("/uploads", (req, res, next) => {
   const fullPath = path.join(__dirname, "uploads", req.url);
