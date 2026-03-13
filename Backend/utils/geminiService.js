@@ -11,12 +11,14 @@ if (!process.env.GEMINI_API_KEY) {
 }
 
 const MODEL_NAMES = [
+  "gemini-2.0-flash",
+  "gemini-flash-lite-latest",
+  "gemini-flash-latest",
+  "gemini-pro-latest",
   "gemini-1.5-flash",
-  "gemini-1.5-flash-8b",
   "gemini-1.5-pro",
-  "gemini-1.0-pro",
-  "gemini-2.0-flash-exp",
-  "gemini-2.0-flash"
+  "gemini-2.5-flash",
+  "gemini-2.5-flash-lite",
 ];
 
 // Cache the working model name to avoid repeated failures
@@ -54,10 +56,15 @@ const callGeminiWithFallback = async (prompt) => {
       console.warn(`[Gemini] Model ${modelName} failed: ${error.message}`);
       lastError = error;
       
-      // If it's a rate limit error, wait a bit before trying the next model
-      if (error.message.includes('429') || error.message.includes('quota')) {
-        console.log(`[Gemini] Rate limit hit for ${modelName}, waiting 2s before fallback...`);
+      // If it's a rate limit error or quota exceeded (limit: 0), wait or fallback
+      if (error.message.includes('429') || error.message.includes('quota') || error.message.includes('limit: 0')) {
+        console.log(`[Gemini] Rate limit or quota hit for ${modelName}, waiting 2s before fallback...`);
         await sleep(2000);
+      }
+      
+      // If it's a 404, we don't wait, just move to the next model immediately
+      if (error.message.includes('404')) {
+        continue;
       }
     }
   }

@@ -49,7 +49,8 @@ app.get("/", (req, res) => {
 
 // Static folder for uploads
 app.use("/uploads", (req, res, next) => {
-  const fullPath = path.join(__dirname, "uploads", req.url);
+  const decodedPath = decodeURIComponent(req.url);
+  const fullPath = path.join(__dirname, "uploads", decodedPath);
   import('fs').then(fs => {
     if (fs.existsSync(fullPath)) {
       console.log(`[Static] Serving file: ${fullPath}`);
