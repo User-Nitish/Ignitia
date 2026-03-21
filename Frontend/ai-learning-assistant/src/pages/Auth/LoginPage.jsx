@@ -33,70 +33,85 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-[length:16px_16px] opacity-30"></div>
+    <div className="flex items-center justify-center min-h-screen bg-[#030a0a] relative overflow-hidden">
+        {/* Ambient Retro Glows */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#6dadbe]/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#f59e0b]/5 rounded-full blur-[120px] pointer-events-none translate-y-1/2 -translate-x-1/2" />
+        
+        {/* Scanline Effect */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_4px,3px_100%] pointer-events-none z-10 opacity-20" />
 
-      <div className="relative w-full max-w-md px-6">
-        <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl shadow-xl p-8">
+      <div className="relative w-full max-w-md px-6 z-20">
+        <div className="bg-black/60 backdrop-blur-3xl border border-white/10 rounded-[3rem] shadow-[0_12px_64px_rgba(0,0,0,0.6)] p-10 md:p-12 relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#6dadbe]/40 to-transparent" />
+          
           {/* Header */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl group relative bg-linear-to-r from-blue-500 to-cyan-500 hover:to-cyan-600 active:scale-[0.98] text-white shadow-inner mb-6 transition-all shadow-blue-500/30">
-              <BrainCircuit className="w-8 h-8" strokeWidth={2} />
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-black border border-[#6dadbe]/30 text-[#6dadbe] shadow-[0_0_20px_rgba(109,173,190,0.2)] mb-8 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(109,173,190,0.3)] group-hover:border-[#6dadbe]/50">
+              <BrainCircuit className="w-10 h-10" strokeWidth={1.5} />
             </div>
-            <h1 className="text-3xl font-black text-slate-800 tracking-tight mb-2">Ignitia</h1>
-            <p className="text-slate-500">Sign in to continue your journey</p>
+            <h1 className="text-4xl font-light text-slate-100 tracking-tighter mb-2 lowercase">
+                Ignitia /<span className="font-bold uppercase italic text-white text-3xl ml-1">Access</span>
+            </h1>
+            <p className="text-[10px] font-mono font-bold text-[#6dadbe]/50 uppercase tracking-[0.4em]">&gt; Initialize session protocol</p>
           </div>
 
           {/* Form */}
-          <div className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700">Email</label>
-              <div className="relative">
+            <div className="space-y-3">
+              <label className="block text-[10px] font-mono font-bold text-slate-500 uppercase tracking-[.3em] ml-1">
+                &gt; USER_IDENT
+              </label>
+              <div className="relative group/input">
                 <div
-                  className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "email" ? "text-blue-500" : "text-slate-400"
+                  className={`absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none transition-colors duration-300 ${focusedField === "email" ? "text-[#6dadbe]" : "text-slate-600"
                     }`}
                 >
-                  <Mail className="h-5 w-5" strokeWidth={2} />
+                  <Mail className="h-5 w-5" strokeWidth={1.5} />
                 </div>
                 <input
                   type="email"
                   value={email}
+                  required
                   onChange={(e) => setEmail(e.target.value)}
                   onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full pl-11 pr-4 py-3 bg-white/50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 shadow-sm"
-                  placeholder="you@example.com"
+                  className="w-full pl-14 pr-6 py-4 bg-black border border-white/10 rounded-2xl focus:outline-none focus:border-[#6dadbe]/50 transition-all duration-300 text-slate-100 placeholder:text-slate-700 font-mono text-sm"
+                  placeholder="Enter email address"
                 />
               </div>
             </div>
 
             {/* Password Field */}
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700">Password</label>
-              <div className="relative">
+            <div className="space-y-3">
+               <label className="block text-[10px] font-mono font-bold text-slate-500 uppercase tracking-[.3em] ml-1">
+                &gt; PASS_TOKEN
+              </label>
+              <div className="relative group/input">
                 <div
-                  className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "password" ? "text-blue-500" : "text-slate-400"
+                  className={`absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none transition-colors duration-300 ${focusedField === "password" ? "text-[#6dadbe]" : "text-slate-600"
                     }`}
                 >
-                  <Lock className="h-5 w-5" strokeWidth={2} />
+                  <Lock className="h-5 w-5" strokeWidth={1.5} />
                 </div>
                 <input
                   type="password"
                   value={password}
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setFocusedField("password")}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full pl-11 pr-4 py-3 bg-white/50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 shadow-sm"
-                  placeholder="Enter your password"
+                  className="w-full pl-14 pr-6 py-4 bg-black border border-white/10 rounded-2xl focus:outline-none focus:border-[#6dadbe]/50 transition-all duration-300 text-slate-100 placeholder:text-slate-700 font-mono text-sm"
+                  placeholder="Enter secure token"
                 />
               </div>
             </div>
 
             {/* Error Message */}
             {error && (
-              <div className="mt-2 p-3 bg-red-50 border border-red-100 rounded-xl">
-                <p className="text-red-600 text-sm font-medium text-center">{error}</p>
+              <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl animate-in fade-in duration-300">
+                <p className="text-rose-500 text-[10px] font-mono font-bold uppercase tracking-widest text-center">{error}</p>
               </div>
             )}
 
@@ -104,38 +119,37 @@ const LoginPage = () => {
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="group relative w-full h-12 bg-linear-to-r from-blue-500 to-cyan-500 hover:to-cyan-600 active:scale-[0.98] text-white text-sm font-semibold rounded-2xl transition-all disabled:opacity-70 disabled:hover:scale-100 overflow-hidden shadow-lg shadow-blue-500/25"
+              className="group relative w-full h-14 bg-black border border-[#f59e0b] hover:bg-[#f59e0b]/10 text-white text-[10px] font-mono font-bold uppercase tracking-[0.3em] rounded-2xl transition-all duration-300 disabled:opacity-30 flex items-center justify-center gap-3 shadow-[0_4px_30px_rgba(245,158,11,0.2)] active:scale-95"
             >
-              <span className="relative z-10 flex items-center justify-center gap-2">
                 {loading ? (
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    <span>Signing in...</span>
+                  <div className="flex items-center gap-3">
+                    <div className="w-4 h-4 border-2 border-[#f59e0b]/30 border-t-[#f59e0b] rounded-full animate-spin" />
+                    <span>Authorizing...</span>
                   </div>
                 ) : (
                   <>
-                    Sign in
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
+                    Sign In
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
                   </>
                 )}
-              </span>
             </button>
-          </div>
+          </form>
 
           {/* Footer */}
-          <div className="mt-8 text-center">
-            <p className="text-slate-600">
-              Don't have an account?{" "}
-              <Link to="/register" className="font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-all">
-                Sign up
+          <div className="mt-10 text-center">
+            <p className="text-slate-500 text-[11px] font-medium tracking-wide">
+              New operator?{" "}
+              <Link to="/register" className="font-bold text-[#6dadbe] hover:text-[#12768a] transition-all uppercase tracking-widest ml-1 underline decoration-[#6dadbe]/30 underline-offset-4">
+                Register Identity
               </Link>
             </p>
           </div>
 
-          {/* Subtle footer text */}
-          <p className="mt-8 text-center text-xs text-slate-400">
-            By continuing, you agree to our Terms & Privacy Policy
-          </p>
+          <div className="mt-10 pt-8 border-t border-white/5 text-center">
+             <p className="text-[9px] font-mono text-slate-600 uppercase tracking-widest">
+                By accessing this terminal, you agree to the <br/> security protocols & neural guidelines.
+             </p>
+          </div>
         </div>
       </div>
     </div>
