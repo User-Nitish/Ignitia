@@ -16,10 +16,7 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
                         >
                             <span className="relative z-10">{tab.label}</span>
                             {activeTab === tab.name && (
-                                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full shadow-lg shadow-blue-500/25" />
-                            )}
-                            {activeTab === tab.name && (
-                                <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent rounded-t-xl -z-10" />
+                                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full shadow-sm" />
                             )}
                         </button>
                     ))}

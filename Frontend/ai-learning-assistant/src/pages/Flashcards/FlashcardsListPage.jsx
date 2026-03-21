@@ -5,6 +5,12 @@ import Spinner from '../../components/common/Spinner';
 import EmptyState from '../../components/common/EmptyState';
 import FlashcardSetCard from '../../components/flashcards/FlashcardSetCard';
 import toast from 'react-hot-toast';
+import { motion } from 'framer-motion';
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+};
 
 const FlashcardsListPage = () => {
   const [flashcardSets, setFlashcardSets] = useState([]);
@@ -29,35 +35,49 @@ const FlashcardsListPage = () => {
   const renderContent = () => {
     if (loading) {
       return (
-        <div className="flex justify-center items-center py-20">
-          <Spinner />
+        <div className="flex flex-col items-center justify-center py-24 gap-4">
+          <div className="w-12 h-12 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin" />
+          <p className="text-[10px] font-mono font-bold text-amber-500/40 uppercase tracking-[0.3em]">Retrieving Flashcard Clusters...</p>
         </div>
       );
     }
 
     if (flashcardSets.length === 0) {
       return (
-        <div className="bg-white border border-dashed border-slate-200 rounded-2xl">
-          <EmptyState
-            title="No Flashcard Sets Found"
-            description="You haven't generated any flashcards yet. Go to a document to create."
-          />
+        <div className="flex flex-col items-center justify-center min-h-[400px] border border-dashed border-white/10 rounded-[3rem] p-12 bg-black/40">
+            <div className="w-20 h-20 rounded-2xl bg-black border border-amber-500/30 text-amber-500 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(245,158,11,0.1)]">
+               <BookOpen size={32} strokeWidth={1.5} />
+            </div>
+            <h3 className="text-2xl font-light text-slate-100 mb-2 lowercase">No Flashcard <span className="font-bold uppercase italic text-white">Archives</span></h3>
+            <p className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest mb-10 max-w-sm text-center">
+               &gt; Neural training data sets not yet initialized...
+            </p>
         </div>
       );
     }
 
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {flashcardSets.map((set) => (
-          <FlashcardSetCard key={set._id} flashcardSet={set} />
+      <motion.div 
+        initial="hidden" animate="visible"
+        variants={{
+          visible: { transition: { staggerChildren: 0.1 } }
+        }}
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+      >
+        {flashcardSets.map((set, index) => (
+          <motion.div key={set._id} className="h-full" variants={itemVariants}>
+            <FlashcardSetCard flashcardSet={set} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     );
   };
 
   return (
     <div className="space-y-8 pb-12">
-      <PageHeader title="All Flashcard Sets" />
+      <div>
+         <PageHeader title="All Flashcard Sets" />
+      </div>
       {renderContent()}
     </div>
   );

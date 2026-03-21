@@ -6,6 +6,12 @@ import documentsService from "../../services/documentsService";
 import Spinner from "../../components/common/Spinner";
 import Button from "../../components/common/Button";
 import DocumentCard from "../../components/documents/DocumentCard";
+import { motion } from "framer-motion";
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+};
 
 const DocumentListPage = () => {
 
@@ -107,34 +113,40 @@ const DocumentListPage = () => {
 
     if (documents.length === 0) {
       return (
-        <div className="flex flex-col items-center justify-center min-h-[450px] bg-white/40 backdrop-blur-md border border-dashed border-slate-300 rounded-3xl p-12">
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-slate-50 shadow-inner mb-6">
-            <FileText className="w-12 h-12 text-slate-300" strokeWidth={1.5} />
+        <motion.div variants={itemVariants} initial="hidden" animate="visible" className="flex flex-col items-center justify-center min-h-[450px] bg-black/40 backdrop-blur-md border border-dashed border-white/10 rounded-[3rem] p-12 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#6dadbe]/5 pointer-events-none" />
+          <div className="inline-flex items-center justify-center w-24 h-24 rounded-[2rem] bg-black shadow-[0_0_20px_rgba(109,173,190,0.1)] mb-8 border border-[#6dadbe]/30 text-[#6dadbe]">
+            <FileText className="w-12 h-12" strokeWidth={1.5} />
           </div>
-          <h3 className="text-xl font-semibold text-slate-800 mb-2">
-            No Documents Yet
+          <h3 className="text-2xl font-light text-slate-100 mb-3 tracking-tight lowercase">
+            No Documents <span className="font-bold uppercase italic text-white">Detected</span>
           </h3>
-          <p className="text-sm text-slate-500 mb-8 max-w-sm text-center leading-relaxed">
-            Upload your learning materials as PDF documents and let AI help you master them.
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#6dadbe]/50 mb-10 max-w-sm text-center leading-relaxed font-bold">
+            &gt; Initializing upload protocol for data extraction...
           </p>
-          <Button onClick={() => setIsUploadModalOpen(true)}>
-            <Plus className="w-5 h-5" strokeWidth={2.5} />
-            Upload Your First Document
+          <Button variant="primary" size="lg" onClick={() => setIsUploadModalOpen(true)}>
+            <Plus className="w-5 h-5" strokeWidth={2} />
+            Initialize Upload
           </Button>
-        </div>
+        </motion.div>
       );
     }
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <motion.div 
+        initial="hidden" animate="visible"
+        variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
         {documents?.map((doc) => (
-          <DocumentCard
-            key={doc._id}
-            document={doc}
-            onDelete={handleDeleteRequest}
-          />
+          <motion.div key={doc._id} variants={itemVariants}>
+            <DocumentCard
+              document={doc}
+              onDelete={handleDeleteRequest}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     );
   };
 
@@ -143,77 +155,80 @@ const DocumentListPage = () => {
   return (
 
     <div className="">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-[length:16px_16px] opacity-30 pointer-events-none" />
-
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-10">
+        <motion.div initial="hidden" animate="visible" variants={itemVariants} className="flex items-end justify-between mb-12 relative">
           <div>
-            <h1 className="text-2xl font-medium text-slate-900 tracking-tight mb-2">My Documents</h1>
-            <p className="text-slate-500 text-sm">
-              Manage and organize your learning materials
+            <div className="flex items-center gap-3 mb-2">
+               <div className="h-[1px] w-6 bg-[#6dadbe]/50" />
+               <span className="text-[9px] font-mono tracking-[0.3em] text-[#6dadbe] uppercase font-bold">Library // Archive</span>
+            </div>
+            <h1 className="text-4xl font-light text-slate-100 tracking-tight lowercase">Data /<span className="font-bold text-white uppercase italic">Streams</span></h1>
+            <p className="text-slate-500 text-sm mt-2 max-w-md">
+              Encrypted learning materials and processed intelligence modules.
             </p>
           </div>
 
           {documents.length > 0 && (
-            <Button onClick={() => setIsUploadModalOpen(true)}>
-              <Plus className="w-4 h-4" strokeWidth={2.5} />
-              Upload Document
+            <Button variant="secondary" size="md" onClick={() => setIsUploadModalOpen(true)}>
+              <Plus className="w-4 h-4" strokeWidth={2} />
+              New Upload
             </Button>
           )}
-
-        </div>
+        </motion.div>
 
         {renderContent()}
 
       </div>
       {isUploadModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-          <div className="relative w-full max-w-lg bg-white/95 backdrop-blur-xl border border-slate-200/60 rounded-2xl shadow-slate-900/20 p-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl">
+          <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative w-full max-w-lg bg-[#030a0a] border border-white/10 rounded-[2.5rem] shadow-[0_12px_64px_rgba(0,0,0,0.8)] p-8 overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-[#6dadbe]/5 rounded-full blur-[60px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+            
             {/* Close button */}
             <button
               onClick={() => setIsUploadModalOpen(false)}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 transition-colors"
+              className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-xl text-slate-500 hover:text-white transition-all hover:bg-white/5 border border-transparent hover:border-white/10 z-50"
             >
               <X className="w-5 h-5" strokeWidth={2} />
             </button>
 
             {/* Modal Header */}
-            <div className="mb-6">
-              <h2 className="text-xl font-bold text-slate-900">
-                Upload New Document
+            <div className="mb-8 relative z-10">
+              <div className="flex items-center gap-3 mb-2">
+                 <div className="w-1.5 h-1.5 rounded-full bg-[#6dadbe] animate-pulse" />
+                 <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#6dadbe] uppercase">Input Protocol</span>
+              </div>
+              <h2 className="text-2xl font-light text-slate-100 lowercase">
+                Initialize /<span className="font-bold text-white uppercase italic text-xl">Upload</span>
               </h2>
-              <p className="text-sm text-slate-500">
-                Add a PDF document to your library
-              </p>
             </div>
 
             {/* Form */}
             <form onSubmit={handleUpload} className="space-y-6">
               {/* Title Input */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-700">
-                  Document Title
+              <div className="space-y-3 relative z-10">
+                <label className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">
+                  Tag // Title
                 </label>
                 <input
                   type="text"
                   value={uploadTitle}
                   onChange={(e) => setUploadTitle(e.target.value)}
                   required
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium text-slate-800"
-                  placeholder="e.g., React Interview Prep"
+                  className="w-full h-14 px-5 bg-white/[0.03] border border-white/10 rounded-2xl focus:outline-none focus:border-[#6dadbe]/50 transition-all font-mono text-xs uppercase tracking-wider text-slate-200 placeholder:text-slate-700"
+                  placeholder="ASSIGN DESIGNATION..."
                 />
               </div>
 
               {/* File Upload */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-700">
-                  PDF File
+              <div className="space-y-3 relative z-10">
+                <label className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-500 ml-1">
+                  Source // File
                 </label>
                 <div
                   onClick={() => document.getElementById('file-upload').click()}
-                  className="relative border-2 border-dashed border-slate-200 rounded-2xl p-8 transition-all hover:bg-blue-50 hover:border-blue-200 group cursor-pointer text-center"
+                  className="relative border border-dashed border-white/10 rounded-[2rem] p-10 bg-black/40 hover:bg-[#6dadbe]/[0.02] hover:border-[#6dadbe]/30 transition-all group cursor-pointer text-center"
                 >
                   <input
                     id="file-upload"
@@ -222,93 +237,98 @@ const DocumentListPage = () => {
                     onChange={handleFileChange}
                     accept=".pdf"
                   />
-                  <div className="flex flex-col items-center gap-3">
-                    <div className="w-12 h-12 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Upload className="w-6 h-6" strokeWidth={2} />
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="w-14 h-14 bg-black border border-white/10 text-[#6dadbe] rounded-2xl flex items-center justify-center group-hover:border-[#6dadbe]/50 transition-all shadow-[0_0_15px_rgba(109,173,190,0.05)]">
+                      <Upload className="w-7 h-7" strokeWidth={1.5} />
                     </div>
-                    <div className="space-y-1">
-                      <p className="text-sm font-medium text-slate-700">
+                    <div className="space-y-2">
+                      <p className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
                         {uploadFile ? (
-                          <span className="text-blue-600 truncate max-w-[250px] block">
-                            {uploadFile.name}
+                          <span className="text-[#6dadbe] inline-block truncate max-w-[250px]">
+                            &gt; {uploadFile.name}
                           </span>
                         ) : (
-                          <span>Click to upload or drag & drop</span>
+                          <span>Drop transmission or select source</span>
                         )}
                       </p>
-                      <p className="text-xs text-slate-400">PDF up to 10MB</p>
+                      <p className="text-[9px] font-mono text-slate-600 uppercase tracking-tighter">MAX CAPACITY: 10.00MB // FORMAT: PDF</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center gap-3 pt-2">
+              <div className="flex items-center gap-4 pt-4 relative z-10">
                 <button
                   type="button"
                   onClick={() => setIsUploadModalOpen(false)}
                   disabled={uploading}
-                  className="flex-1 px-4 py-3 text-sm font-bold text-slate-500 bg-slate-50 hover:bg-slate-100 rounded-xl transition-all"
+                  className="flex-1 h-14 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-500 bg-white/5 hover:bg-white/10 rounded-2xl transition-all border border-transparent hover:border-white/10 active:scale-95"
                 >
-                  Cancel
+                  Abort
                 </button>
                 <button
                   type="submit"
                   disabled={uploading}
-                  className="flex-[2] px-4 py-3 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 border border-blue-600 rounded-xl shadow-md shadow-blue-500/20 transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50"
+                  className="flex-[2] h-14 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white bg-black border border-[#6dadbe]/50 hover:bg-[#6dadbe]/10 hover:border-[#6dadbe] rounded-2xl shadow-[0_4px_20px_rgba(109,173,190,0.1)] transition-all active:scale-95 disabled:opacity-50"
                 >
                   {uploading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Uploading...
+                    <span className="flex items-center justify-center gap-3">
+                      <div className="w-4 h-4 border-2 border-[#6dadbe]/30 border-t-[#6dadbe] rounded-full animate-spin" />
+                      UPLOADING...
                     </span>
                   ) : (
-                    "Upload and Process"
+                    "Init Sync"
                   )}
                 </button>
               </div>
             </form>
-          </div>
+          </motion.div>
         </div>
       )}
 
       {isDeleteModalOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-          <div className="relative w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl">
+          <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative w-full max-w-md bg-[#030a0a] border border-white/10 rounded-[2.5rem] p-10 shadow-[0_12px_64px_rgba(0,0,0,0.8)] overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-full blur-[40px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
+            
             <button
               onClick={() => setIsDeleteModalOpen(false)}
-              className="absolute top-6 right-6 text-slate-400 hover:text-slate-600 transition-colors"
+              className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-xl text-slate-500 hover:text-white transition-all hover:bg-white/5 border border-transparent hover:border-white/10 z-50"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex flex-col items-center text-center space-y-4">
-              <div className="w-16 h-16 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center">
-                <Trash2 className="w-8 h-8" strokeWidth={2} />
+            <div className="flex flex-col items-center text-center space-y-6 relative z-10">
+              <div className="w-16 h-16 bg-black border border-rose-500/30 text-rose-500 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(225,29,72,0.1)]">
+                <Trash2 className="w-8 h-8" strokeWidth={1.5} />
               </div>
-              <h2 className="text-xl font-bold text-slate-800">Delete Document?</h2>
-              <p className="text-sm text-slate-500 px-2">
-                Are you sure you want to delete <span className="font-semibold text-slate-700">"{selectedDoc?.title}"</span>? All flashcards and quizzes for this document will be lost.
+              <div className="space-y-2">
+                <h2 className="text-2xl font-light text-slate-100 lowercase">Delete /<span className="font-bold uppercase italic text-white text-xl">Archive</span></h2>
+                <p className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest">Protocol Override Required</p>
+              </div>
+              <p className="text-xs text-slate-400 px-2 leading-relaxed font-mono">
+                ARE YOU SURE YOU WANT TO TERMINATE <span className="text-rose-400 font-bold italic">"{selectedDoc?.title}"</span>? ALL LINKED NEURAL NODES AND SIMS WILL BE PERMANENTLY ERASED.
               </p>
             </div>
 
-            <div className="flex items-center gap-3 mt-8">
+            <div className="flex items-center gap-4 mt-10 relative z-10">
               <button
                 onClick={() => setIsDeleteModalOpen(false)}
                 disabled={deleting}
-                className="flex-1 px-4 py-3 text-sm font-bold text-slate-500 bg-slate-50 hover:bg-slate-100 rounded-xl transition-all"
+                className="flex-1 h-14 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-500 bg-white/5 hover:bg-white/10 rounded-2xl transition-all border border-transparent hover:border-white/10 active:scale-95"
               >
-                Cancel
+                Abort
               </button>
               <button
                 onClick={handleConfirmDelete}
                 disabled={deleting}
-                className="flex-1 px-4 py-3 text-sm font-bold text-white bg-red-500 hover:bg-red-600 rounded-xl shadow-lg shadow-red-200 transition-all active:scale-95 disabled:opacity-50"
+                className="flex-1 h-14 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white bg-rose-600/10 hover:bg-rose-600/20 border border-rose-500/40 rounded-2xl shadow-[0_4px_20px_rgba(225,29,72,0.1)] transition-all active:scale-95 disabled:opacity-50"
               >
-                {deleting ? "Deleting..." : "Yes, Delete"}
+                {deleting ? "PURGING..." : "Terminate"}
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
 

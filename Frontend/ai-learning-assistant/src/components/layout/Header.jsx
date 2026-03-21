@@ -18,60 +18,58 @@ const Header = ({ toggleSidebar }) => {
     }, []);
 
     return (
-        <header className="sticky top-0 z-40 w-full h-16 bg-white/60 backdrop-blur-2xl border-b border-slate-200/50 flex items-center justify-between px-6 transition-all duration-300">
+        <header className="sticky top-0 z-40 w-full h-16 glass border-b-0 flex items-center justify-between px-6">
             {/* Mobile Menu Button */}
             <button
                 onClick={toggleSidebar}
-                className="md:hidden inline-flex items-center justify-center w-10 h-10 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-all duration-200"
+                className="md:hidden inline-flex items-center justify-center w-10 h-10 text-slate-400 hover:text-slate-200 hover:bg-white/10 rounded-xl transition-all duration-200"
                 aria-label="Toggle sidebar"
             >
-                <Menu size={24} />
+                <Menu size={20} strokeWidth={2} />
             </button>
 
             <div className="flex-1 hidden md:block"></div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
                 <div className="relative" ref={notificationRef}>
                     <button 
                         onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-                        className={`group inline-flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 ${isNotificationsOpen ? 'text-amber-600 bg-amber-100' : 'text-slate-600 hover:text-amber-500 hover:bg-amber-50'}`}
+                        className={`group inline-flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 ${isNotificationsOpen ? 'text-[#6dadbe] bg-[#6dadbe]/10' : 'text-slate-400 hover:text-slate-200 hover:bg-white/10'}`}
                     >
-                        <Bell size={20} strokeWidth={2} className={`${isNotificationsOpen ? '' : 'group-hover:scale-110'} transition-transform`} />
-                        <span className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full border border-white"></span>
+                        <Bell size={18} strokeWidth={2} className={`${isNotificationsOpen ? '' : 'group-hover:scale-105'} transition-transform`} />
+                        <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-[#6dadbe] rounded-full shadow-[0_0_8px_rgba(109,173,190,0.8)]"></span>
                     </button>
 
                     {/* Notification Dropdown */}
                     {isNotificationsOpen && (
-                        <div className="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200 origin-top-right">
-                            <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                                <h3 className="font-bold text-slate-800">Notifications</h3>
-                                <span className="text-xs font-semibold px-2 py-1 bg-amber-100 text-amber-700 rounded-md">
-                                    New
-                                </span>
+                        <div className="absolute right-0 mt-4 w-96 bg-black/80 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-500 origin-top-right shadow-[0_20px_80px_rgba(0,0,0,0.8)]">
+                            <div className="px-8 py-6 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
+                                <h3 className="text-[10px] font-mono font-bold text-[#6dadbe] uppercase tracking-[0.4em]">Notifications</h3>
+                                <div className="w-1.5 h-1.5 rounded-full bg-[#6dadbe] animate-pulse" />
                             </div>
-                            <div className="p-6 text-center">
-                                <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                                    <Bell size={20} className="text-slate-400" />
+                            <div className="p-12 text-center">
+                                <div className="w-16 h-16 bg-black border border-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(109,173,190,0.1)]">
+                                    <Bell size={24} strokeWidth={1.5} className="text-[#6dadbe]/40" />
                                 </div>
-                                <p className="text-sm font-medium text-slate-600">No new notifications</p>
-                                <p className="text-xs text-slate-400 mt-1">We'll let you know when something arrives.</p>
+                                <p className="text-lg font-light text-slate-200 lowercase italic">No new <span className="font-bold uppercase not-italic tracking-tighter">notifications</span></p>
+                                <p className="text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest mt-2">&gt; System synchronization active...</p>
                             </div>
                         </div>
                     )}
                 </div>
 
                 {/* User Profile */}
-                <div className="flex items-center gap-3 pl-4 border-l border-slate-200/60">
+                <div className="flex items-center gap-3 pl-6 border-l border-white/10 group cursor-pointer">
                     <div className="text-right hidden sm:block">
-                        <p className="text-sm font-semibold text-slate-900 leading-none mb-1">
+                        <p className="text-sm font-semibold text-slate-100 leading-none mb-1 group-hover:text-[#6dadbe] transition-colors uppercase tracking-wider">
                             {user?.username || "User"}
                         </p>
-                        <p className="text-xs font-medium text-slate-500 leading-none">
+                        <p className="text-[10px] font-mono tracking-widest text-slate-500 leading-none uppercase">
                             {user?.email || "user@example.com"}
                         </p>
                     </div>
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm transition-transform duration-300 hover:scale-105 hover:shadow-md cursor-pointer">
-                        <User size={20} strokeWidth={2.5} />
+                    <div className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 transition-all duration-300 group-hover:bg-[#6dadbe]/10 group-hover:text-[#6dadbe] group-hover:border-[#6dadbe]/30">
+                        <User size={16} strokeWidth={2} />
                     </div>
                 </div>
             </div>

@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import Spinner from "../../components/common/Spinner";
 import progressService from "../../services/progressService";
 import toast from "react-hot-toast";
-import { FileText, BookOpen, BrainCircuit, TrendingUp, Clock } from "lucide-react";
+import { FileText, BookOpen, BrainCircuit, TrendingUp, Clock, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+};
 
 const DashboardPage = () => {
   const [dashboardData, setDashboardData] = useState(null);
@@ -31,12 +37,13 @@ const DashboardPage = () => {
 
   if (!dashboardData || !dashboardData.overview) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center ">
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl group relative bg-blue-600 text-white shadow-md border border-blue-700 mb-6 transition-all">
-            <TrendingUp className="w-8 h-8" />
+      <div className="min-h-[80vh] flex items-center justify-center relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#6dadbe]/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="text-center relative z-10">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-black border border-[#6dadbe]/30 text-[#6dadbe] mb-8 shadow-[0_0_20px_rgba(109,173,190,0.2)]">
+            <TrendingUp className="w-10 h-10" strokeWidth={1.5} />
           </div>
-          <p className="text-slate-600 text-sm">No dashboard data available.</p>
+          <p className="text-[#6dadbe]/60 font-mono tracking-widest text-xs uppercase italic">&gt; No data streams detected in current sector.</p>
         </div>
       </div>
     );
@@ -47,72 +54,102 @@ const DashboardPage = () => {
       label: "Total Documents",
       value: dashboardData.overview.totalDocuments,
       icon: FileText,
-      background: "bg-blue-50",
-      textColor: "text-blue-600",
-      borderColor: "group-hover:border-blue-200"
     },
     {
       label: "Total Questions",
       value: dashboardData.overview.totalQuestions,
       icon: BookOpen,
-      background: "bg-purple-50",
-      textColor: "text-purple-600",
-      borderColor: "group-hover:border-purple-200",
     },
     {
       label: "Total Quizzes",
       value: dashboardData.overview.totalQuizzes,
       icon: BrainCircuit,
-      background: "bg-emerald-50",
-      textColor: "text-emerald-600",
-      borderColor: "group-hover:border-emerald-200",
     }
   ];
 
   return (
-    <div className="min-h-screen relative">
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-[length:16px_16px] opacity-50 -z-10"></div>
-
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen relative pb-12 overflow-hidden">
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#f59e0b]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
         {/* Header */}
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight mb-2">Dashboard</h1>
-          <p className="text-slate-500 font-medium">
-            Track your learning progress and activity
+        <motion.div initial="hidden" animate="visible" variants={itemVariants} className="relative">
+          <div className="flex items-center gap-4 mb-2">
+            <div className="h-[1px] w-8 bg-[#6dadbe]/50" />
+            <span className="text-[10px] font-mono tracking-[0.4em] text-[#6dadbe] uppercase font-bold">Dashboard // Home</span>
+          </div>
+          <h1 className="text-5xl font-light text-slate-100 tracking-tight mb-4 lowercase">
+            System /<span className="font-bold text-white uppercase italic">Overview</span>
+          </h1>
+          <p className="text-slate-400 font-medium text-lg max-w-2xl leading-relaxed">
+            Real-time analytics and personal study metrics.
           </p>
-        </div>
+          <div className="absolute -top-10 -left-20 w-64 h-64 bg-[#6dadbe]/5 rounded-full blur-[100px] pointer-events-none" />
+        </motion.div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stats.map((stat, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 hover:shadow-md transition-all duration-300 overflow-hidden ${stat.borderColor}`}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.1 }}
+              className={`relative bg-black/60 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-8 hover:border-[#6dadbe]/30 transition-all duration-500 group cursor-default overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]`}
             >
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                    {stat.label}
-                  </p>
-                  <p className="text-3xl font-bold text-slate-900">
-                    {stat.value}
-                  </p>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#6dadbe]/5 rounded-full blur-2xl group-hover:bg-[#6dadbe]/10 transition-colors duration-500 translate-x-1/2 -translate-y-1/2" />
+              
+              <div className="flex items-center justify-between mb-8 relative z-10">
+                <div className={`w-12 h-12 rounded-xl bg-black border border-white/10 text-[#6dadbe] flex items-center justify-center transition-all duration-500 group-hover:border-[#6dadbe]/50 group-hover:shadow-[0_0_15px_rgba(109,173,190,0.2)]`}>
+                  <stat.icon size={22} strokeWidth={1.5} />
                 </div>
-                <div className={`w-12 h-12 rounded-xl border border-transparent ${stat.background} ${stat.textColor} flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
-                  <stat.icon size={24} strokeWidth={2.5} />
+                <div className="flex items-center gap-1">
+                   <div className="w-1.5 h-1.5 rounded-full bg-[#f59e0b] animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
+                   <span className="text-[10px] font-mono text-[#f59e0b] uppercase tracking-widest font-bold">Online</span>
                 </div>
               </div>
-            </div>
+               <div className="relative z-10">
+                  <p className="text-4xl font-bold text-white tracking-tighter mb-2 font-mono">
+                    {String(stat.value).padStart(2, '0')}.<span className="text-[#6dadbe]/20">00</span>
+                  </p>
+                  <p className="text-xs font-mono font-bold text-slate-500 uppercase tracking-[0.2em]">
+                    {stat.label}
+                  </p>
+                </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Recent Activity Section */}
-        <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200/60">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-              <Clock size={20} strokeWidth={2.5} />
+        <motion.div 
+            variants={itemVariants} 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, margin: "-50px" }}
+            className="bg-black/60 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-10 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+        >
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#6dadbe]/5 rounded-full blur-[100px] pointer-events-none" />
+          
+          <div className="flex items-center justify-between mb-10 relative z-10">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-black border border-white/10 flex items-center justify-center text-[#f59e0b] shadow-[0_0_15px_rgba(245,158,11,0.15)]">
+                <Clock size={22} strokeWidth={1.5} />
+              </div>
+              <div>
+                <h3 className="text-2xl font-light text-slate-100 tracking-tight lowercase">Recent <span className="font-bold uppercase italic text-white">Activity</span></h3>
+                <p className="text-[10px] font-mono text-[#f59e0b]/50 uppercase tracking-[0.2em] font-bold mt-1">Status: Monitoring Session Logs</p>
+              </div>
             </div>
-            <h3 className="text-xl font-bold text-slate-900">Recent Activity</h3>
+            <div className="hidden md:flex flex-col items-end gap-1">
+               <div className="flex gap-1">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="w-4 h-1 bg-[#6dadbe]/20 rounded-full" />
+                  ))}
+               </div>
+               <span className="text-[9px] font-mono text-[#6dadbe]/30 uppercase">Protocol 08-A</span>
+            </div>
           </div>
 
           {dashboardData.recentActivity &&
@@ -137,55 +174,69 @@ const DashboardPage = () => {
               ]
                 .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
                 .map((activity, index) => (
-                  <div
+                  <motion.div
                     key={activity.id || index}
-                    className="flex items-center justify-between p-4 rounded-2xl bg-slate-50/50 border border-transparent hover:border-slate-200 hover:bg-white transition-all duration-200 group"
+                    variants={itemVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-20px" }}
+                    transition={{ delay: index * 0.05 }}
+                    className="flex flex-col sm:flex-row sm:items-center justify-between p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-[#6dadbe]/5 hover:border-[#6dadbe]/30 transition-all duration-500 group gap-4 relative overflow-hidden"
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="absolute inset-y-0 left-0 w-[2px] bg-[#6dadbe]/20 group-hover:bg-[#6dadbe]/60 transition-colors" />
+                    
+                    <div className="flex items-center gap-5 relative z-10">
                       <div
-                        className={`w-2.5 h-2.5 rounded-full ${activity.type === "document"
-                          ? "bg-blue-500"
-                          : "bg-emerald-500"
+                        className={`w-12 h-12 shrink-0 rounded-xl flex items-center justify-center border transition-all duration-500 ${activity.type === "document"
+                          ? "bg-black border-white/10 text-[#6dadbe] group-hover:border-[#6dadbe]/40"
+                          : "bg-black border-white/10 text-[#6dadbe] group-hover:border-[#6dadbe]/40"
                           }`}
-                      ></div>
+                      >
+                         {activity.type === "document" ? <FileText size={20} strokeWidth={1.5} /> : <BookOpen size={20} strokeWidth={1.5} />}
+                      </div>
                       <div>
-                        <p className="text-sm font-bold text-slate-800">
-                          {activity.type === "document"
-                            ? "Accessed Document: "
-                            : "Attempted Quiz: "}
-                          <span className="font-medium text-slate-600">
-                            {activity.description}
-                          </span>
+                        <p className="text-sm font-mono text-slate-500 uppercase tracking-widest mb-1 font-bold">
+                          {activity.type === "document" ? "DOC // VIEWED" : "QUIZ // ATTEMPT"}
                         </p>
-                        <p className="text-xs font-medium text-slate-400 mt-0.5">
-                          {new Date(activity.timestamp).toLocaleString()}
-                        </p>
+                        <h4 className="text-lg font-bold text-slate-200 tracking-tight group-hover:text-white transition-colors">
+                          {activity.description}
+                        </h4>
+                        <div className="flex items-center gap-2 mt-2">
+                           <div className="w-1 h-1 rounded-full bg-[#6dadbe]/40" />
+                           <p className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">
+                            TIMESTAMP: {new Date(activity.timestamp).toLocaleString(undefined, {
+                                year: '2-digit', month: '2-digit', day: '2-digit',
+                                hour: '2-digit', minute: '2-digit', hour12: false
+                            }).replace(',', ' //')}
+                           </p>
+                        </div>
                       </div>
                     </div>
 
                     {activity.link && (
                       <a
                         href={activity.link}
-                        className="opacity-0 group-hover:opacity-100 px-4 py-2 text-xs font-bold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-200"
+                        className="inline-flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-white bg-black hover:bg-[#f59e0b]/10 px-5 py-3 rounded-xl border border-[#f59e0b] hover:border-[#f59e0b] shadow-[0_0_20px_rgba(245,158,11,0.1)] transition-all z-10 active:scale-95"
                       >
-                        View Details
+                        Open
+                        <ArrowRight size={14} className="transition-transform group-hover:translate-x-1 text-[#f59e0b]" />
                       </a>
                     )}
-                  </div>
+                  </motion.div>
                 ))}
             </div>
           ) : (
             <div className="text-center py-12">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-50 text-slate-300 mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/5 text-slate-500 border border-white/10 mb-4">
                 <Clock size={32} />
               </div>
-              <p className="text-slate-600 font-bold">No recent activity yet.</p>
-              <p className="text-slate-400 text-sm mt-1">
+              <p className="text-slate-300 font-bold">No recent activity yet.</p>
+              <p className="text-slate-500 text-sm mt-1">
                 Start learning to see your progress here
               </p>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

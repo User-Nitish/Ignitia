@@ -10,21 +10,21 @@ const Button = ({
     size = "md",
 }) => {
     const baseStyles =
-        "inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 whitespace-nowrap";
+        "inline-flex items-center justify-center gap-3 font-bold uppercase tracking-widest rounded-xl transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 whitespace-nowrap outline-none relative overflow-hidden group/btn shadow-[0_4px_15px_rgba(0,0,0,0.5)]";
 
     const variantStyles = {
         primary:
-            "bg-blue-600 border border-blue-600 text-white shadow-md shadow-blue-500/20 hover:bg-blue-700 hover:border-blue-700 hover:-translate-y-0.5 active:translate-y-0 relative overflow-hidden before:absolute before:inset-0 before:bg-white/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity",
+            "bg-black border border-white/10 hover:border-amber-500/50 hover:bg-amber-500/10 text-slate-200 hover:text-amber-400",
         secondary:
-            "bg-slate-100/80 border border-slate-200 text-slate-700 shadow-sm hover:shadow-md hover:bg-slate-200 hover:border-slate-300 hover:-translate-y-0.5 active:translate-y-0",
+            "bg-white/5 border border-white/10 hover:border-amber-500/30 hover:bg-white/10 text-slate-300 hover:text-amber-500",
         outline:
-            "border-2 border-slate-200 text-slate-700 bg-white hover:bg-slate-50 hover:border-blue-300 hover:text-blue-600 hover:-translate-y-0.5 active:translate-y-0",
+            "border border-white/10 text-amber-500/70 bg-transparent hover:bg-amber-500/5 hover:border-amber-500/40 hover:text-amber-400",
     };
 
     const sizeStyles = {
-        sm: "h-9 px-4 text-xs",
-        md: "h-11 px-5 text-sm",
-        lg: "h-13 px-6 text-base",
+        sm: "h-10 px-5 text-[10px]",
+        md: "h-12 px-8 text-xs",
+        lg: "h-14 px-10 text-sm",
     };
 
     return (

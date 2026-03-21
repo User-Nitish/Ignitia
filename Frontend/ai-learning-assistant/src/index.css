@@ -5,50 +5,77 @@
 
 @theme {
     --font-display: "Urbanist", sans-serif;
+    --font-sans: "Urbanist", sans-serif;
+    
     --breakpoint-3xl: 1920px;
-    --color-primary: #2563eb;
+    
+    /* Vintage Sci-Fi Re-Theme Palette */
+    --color-scifi-base: #030a0a;     /* Eight Ball */
+    --color-scifi-surface: #0b3f43;  /* Ghostlands Coal */
+    --color-scifi-accent: #6dadbe;   /* Water Music */
+    --color-scifi-deep: #12768a;     /* Alpine Landing */
+    --color-scifi-muted: #515c5c;    /* Bovine */
+    --color-scifi-light: #cedadb;    /* Light Detroit */
+
+    /* 60-30-10 Color Rule Mapping */
+    --color-neutral-bg: var(--color-scifi-base);
+    --color-neutral-text: var(--color-scifi-light);
+    --color-neutral-subtext: var(--color-scifi-muted);
+    
+    --color-secondary-surface: rgba(11, 63, 67, 0.4);
+    --color-secondary-border: rgba(109, 173, 190, 0.1);
+    --color-secondary-hover: rgba(109, 173, 190, 0.05);
+
+    --color-primary-base: var(--color-scifi-accent);
+    --color-primary-hover: #8fc4d1;
+    --color-primary-light: rgba(109, 173, 190, 0.1);
 }
 
 @layer base {
     html {
         font-family: var(--font-display);
         scroll-behavior: smooth;
+        /* Typography scale base */
+        font-size: 16px; 
     }
 
     body {
-        background-color: #fcfbfc;
+        background-color: var(--color-neutral-bg);
+        color: var(--color-neutral-text);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Custom Scrollbar */
+    /* Headings Typography Scale */
+    h1 { @apply text-4xl md:text-5xl font-bold tracking-tight leading-tight; }
+    h2 { @apply text-3xl md:text-4xl font-bold tracking-tight leading-snug; }
+    h3 { @apply text-2xl md:text-3xl font-semibold tracking-tight leading-snug; }
+    h4 { @apply text-xl md:text-2xl font-semibold leading-normal; }
+    p { @apply text-base leading-relaxed; }
+
+    /* Custom Scrollbar - Minimal */
     ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
     }
     ::-webkit-scrollbar-track {
         background: transparent;
     }
     ::-webkit-scrollbar-thumb {
-        background-color: #cbd5e1;
-        border-radius: 20px;
-        border: 2px solid transparent;
-        background-clip: content-box;
+        background-color: var(--color-neutral-800);
+        border-radius: 10px;
     }
     ::-webkit-scrollbar-thumb:hover {
-        background-color: #94a3b8;
+        background-color: var(--color-neutral-700);
     }
 }
 
 @layer utilities {
+    /* Glassmorphism */
     .glass {
-        @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
+        @apply bg-neutral-950/70 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/50 transition-all duration-300;
     }
     .glass-card {
-        @apply bg-white/80 backdrop-blur-md border border-slate-200/60 shadow-lg hover:shadow-xl transition-all duration-300;
-    }
-    .text-gradient {
-        @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-500 to-rose-500;
-    }
-    .hover-lift {
-        @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl;
+        @apply bg-neutral-900/60 backdrop-blur-md border border-white/5 hover:border-white/10 shadow-xl shadow-black/40 hover:shadow-black/60 transition-all duration-300;
     }
 }

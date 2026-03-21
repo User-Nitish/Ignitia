@@ -5,63 +5,62 @@ import moment from "moment";
 
 const QuizCard = ({ quiz, onDelete }) => {
     return (
-        <div className="group relative bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-[2rem] p-6 shadow-xl shadow-slate-200/50 hover:shadow-indigo-100/50 transition-all duration-300 hover:-translate-y-1">
+        <div className="group relative bg-black/60 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-7 transition-all duration-500 hover:border-[#6dadbe]/30 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#6dadbe]/5 rounded-full blur-2xl group-hover:bg-[#6dadbe]/10 transition-colors duration-500 translate-x-1/2 -translate-y-1/2" />
+
             {/* Delete Button */}
             <button
                 onClick={(e) => {
                     e.stopPropagation();
                     onDelete(quiz);
                 }}
-                className="absolute top-4 right-4 p-2.5 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-xl transition-all duration-200"
+                className="absolute top-6 right-6 p-2 text-slate-500 hover:text-rose-500 hover:bg-rose-500/10 rounded-xl border border-transparent hover:border-rose-500/30 transition-all duration-300 z-10"
                 title="Delete Quiz"
             >
-                <Trash2 className="w-5 h-5" strokeWidth={2} />
+                <Trash2 className="w-4 h-4" strokeWidth={1.5} />
             </button>
 
             <div className="space-y-5">
                 {/* Score Badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 shadow-sm">
-                    <Award className="w-4 h-4 text-indigo-600" strokeWidth={2.5} />
-                    <span className="text-xs font-bold text-indigo-700 uppercase tracking-wider">
-                        Score: {quiz?.score ?? 0}%
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black border border-white/10 group-hover:border-[#6dadbe]/30 transition-colors relative z-10">
+                    <Award className="w-3.5 h-3.5 text-[#6dadbe]" strokeWidth={1.5} />
+                    <span className="text-[10px] font-mono font-bold text-[#6dadbe]/80 uppercase tracking-widest">
+                        SCORE: {quiz?.score ?? 0}
                     </span>
                 </div>
 
-                <div>
-                    <h3 className="text-lg font-bold text-slate-800 mb-1.5 line-clamp-1 group-hover:text-indigo-700 transition-colors">
-                        {quiz.title || `Quiz - ${moment(quiz.createdAt).format("MMM D")}`}
+                <div className="relative z-10">
+                    <h3 className="text-lg font-bold text-slate-100 mb-2 truncate tracking-tight group-hover:text-white transition-colors">
+                        {quiz.title || `Quiz_${moment(quiz.createdAt).format("MMDD")}`}
                     </h3>
-                    <p className="text-xs font-medium text-slate-500 uppercase tracking-tight">
-                        Created {moment(quiz.createdAt).fromNow()}
+                    <p className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-[0.2em]">
+                        CREATED: {moment(quiz.createdAt).fromNow()}
                     </p>
                 </div>
 
                 {/* Quiz Info Stats */}
-                <div className="flex items-center gap-4 py-1">
-                    <div className="flex items-center gap-1.5 text-slate-600">
-                        <BookOpen className="w-4 h-4" strokeWidth={2} />
-                        <span className="text-sm font-semibold">
-                            {quiz.questions.length} {quiz.questions.length === 1 ? "Question" : "Questions"}
-                        </span>
+                <div className="flex items-center gap-4 py-1 relative z-10">
+                    <div className="flex items-center gap-2 text-slate-400 font-mono text-[10px] uppercase font-bold tracking-wider">
+                        <BookOpen className="w-3.5 h-3.5 text-[#6dadbe]/40" strokeWidth={1.5} />
+                        <span>{quiz.questions.length} QUESTIONS</span>
                     </div>
                 </div>
 
                 {/* Action Button */}
-                <div className="pt-2">
+                <div className="pt-4 relative z-10">
                     {quiz?.userAnswers?.length > 0 ? (
                         <Link to={`/quizzes/${quiz._id}/results`} className="block">
-                            <button className="w-full relative group/btn flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 hover:from-purple-600 hover:via-fuchsia-600 hover:to-pink-600 text-white text-sm font-bold rounded-2xl overflow-hidden transition-all duration-300 shadow-lg shadow-fuchsia-300/50 hover:shadow-fuchsia-400/60 hover:scale-[1.02]">
-                                <BarChart2 className="w-4 h-4" strokeWidth={2.5} />
+                            <button className="w-full flex items-center justify-center gap-3 py-3.5 px-4 bg-white/5 hover:bg-[#6dadbe]/10 text-[#6dadbe] text-[10px] font-mono font-bold uppercase tracking-[0.2em] rounded-2xl border border-white/10 hover:border-[#6dadbe]/40 transition-all active:scale-[0.98]">
+                                <BarChart2 className="w-4 h-4" strokeWidth={1.5} />
                                 View Results
-                                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700 ease-in-out" />
                             </button>
                         </Link>
                     ) : (
                         <Link to={`/quizzes/${quiz._id}`} className="block">
-                            <button className="w-full relative group/btn flex items-center justify-center gap-2 py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-2xl overflow-hidden transition-all duration-200 shadow-lg shadow-indigo-200">
-                                <Play className="w-4 h-4 fill-current" strokeWidth={2.5} />
+                            <button className="w-full flex items-center justify-center gap-3 py-3.5 px-4 bg-black border border-[#6dadbe]/50 hover:bg-[#6dadbe]/10 hover:border-[#6dadbe] text-white text-[10px] font-mono font-bold uppercase tracking-[0.2em] rounded-2xl shadow-[0_4px_20px_rgba(109,173,190,0.1)] transition-all active:scale-[0.98]">
+                                <Play className="w-3.5 h-3.5 fill-[#6dadbe] text-[#6dadbe]" strokeWidth={1.5} />
                                 Start Quiz
-                                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500" />
                             </button>
                         </Link>
                     )}

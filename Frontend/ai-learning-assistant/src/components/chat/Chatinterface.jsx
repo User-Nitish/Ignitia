@@ -93,15 +93,15 @@ const ChatInterface = () => {
                 className={`flex items-start gap-3 my-6 ${isUser ? "flex-row-reverse" : "flex-row"}`}
             >
                 {!isUser && (
-                    <div className="w-8 h-8 rounded-lg bg-cyan-100 flex items-center justify-center flex-shrink-0 border border-cyan-200">
-                        <Sparkles className="w-4 h-4 text-blue-600" strokeWidth={2.5} />
+                    <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center flex-shrink-0 border border-[#6dadbe]/40 shadow-[0_0_10px_rgba(109,173,190,0.2)]">
+                        <Sparkles className="w-4 h-4 text-[#6dadbe]" strokeWidth={2.5} />
                     </div>
                 )}
 
                 <div
-                    className={`group relative max-w-[85%] md:max-w-[75%] p-4 rounded-2xl shadow-sm transition-all duration-200 ${isUser
-                        ? "bg-gradient-to-br from-blue-600 to-cyan-500 text-white rounded-tr-none shadow-blue-500/20"
-                        : "bg-white border border-slate-200/80 text-slate-800 rounded-tl-none hover:border-slate-300"
+                    className={`group relative max-w-[85%] md:max-w-[75%] p-4 rounded-2xl shadow-sm transition-all duration-300 ${isUser
+                        ? "bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-tr-none shadow-[0_4px_15px_rgba(0,0,0,0.5)]"
+                        : "bg-black/60 backdrop-blur-md border border-[#6dadbe]/20 text-slate-300 rounded-tl-none hover:border-[#6dadbe]/40 shadow-[0_4px_15px_rgba(0,0,0,0.5)] font-mono text-[13px] leading-relaxed"
                         }`}
                 >
                     {isUser ? (
@@ -127,31 +127,36 @@ const ChatInterface = () => {
 
     if (initialLoading) {
         return (
-            <div className="flex flex-col h-[70vh] bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl items-center justify-center shadow-2xl shadow-slate-200/50">
-                <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center animate-pulse">
-                    <MessageSquare className="w-8 h-8 text-blue-600" strokeWidth={2} />
+            <div className="flex flex-col h-[70vh] bg-black/80 backdrop-blur-3xl border border-white/10 rounded-[2rem] items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.8)] relative overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#6dadbe]/5 rounded-full blur-[100px] pointer-events-none" />
+                <div className="w-16 h-16 rounded-2xl bg-black border border-[#6dadbe]/30 flex items-center justify-center animate-pulse shadow-[0_0_20px_rgba(109,173,190,0.2)] z-10">
+                    <MessageSquare className="w-8 h-8 text-[#6dadbe]" strokeWidth={1.5} />
                 </div>
-                <div className="mt-6 flex flex-col items-center">
+                <div className="mt-8 flex flex-col items-center z-10">
                     <Spinner />
-                    <p className="text-slate-500 font-semibold mt-4 text-sm tracking-wide">Initializing secure chat ...</p>
+                    <p className="text-[#6dadbe]/70 font-mono mt-6 text-xs tracking-[0.2em] uppercase">Booting Neural Link...</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="flex flex-col h-[75vh] bg-white/60 backdrop-blur-2xl border border-slate-200/70 rounded-3xl shadow-2xl shadow-slate-200/40 overflow-hidden transition-all duration-300">
+        <div className="flex flex-col h-[75vh] bg-black/80 backdrop-blur-3xl border border-white/10 rounded-[2rem] shadow-[0_8px_32px_rgba(0,0,0,0.8)] overflow-hidden transition-all duration-500 relative">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#6dadbe]/5 rounded-full blur-[80px] pointer-events-none" />
+            
             {/* Messages Area */}
-            <div className="flex-1 p-6 overflow-y-auto bg-gradient-to-br from-slate-50/80 via-white to-slate-50/80 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+            <div data-lenis-prevent className="flex-1 min-h-0 p-6 overflow-y-auto bg-transparent scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent z-10 relative">
                 {history.length === 0 && (
-                    <div className="flex flex-col items-center justify-center h-full text-center p-8 space-y-4">
-                        <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center shadow-inner">
-                            <Sparkles className="w-10 h-10 text-blue-500/80" strokeWidth={1.5} />
+                    <div className="flex flex-col items-center justify-center h-full text-center p-8 space-y-6">
+                        <div className="w-20 h-20 rounded-2xl bg-black border border-[#6dadbe]/30 flex items-center justify-center shadow-[0_0_30px_rgba(109,173,190,0.1)] relative">
+                            <div className="absolute inset-x-0 h-[1px] top-1/2 bg-[#6dadbe]/20" />
+                            <div className="absolute inset-y-0 w-[1px] left-1/2 bg-[#6dadbe]/20" />
+                            <Sparkles className="w-8 h-8 text-[#6dadbe] z-10" strokeWidth={1.5} />
                         </div>
-                        <div className="space-y-2">
-                            <h3 className="text-xl font-bold text-slate-800">Knowledge Assistant Ready</h3>
-                            <p className="text-slate-500 max-w-xs mx-auto text-sm">
-                                Ask specific questions about the document to extract deep insights.
+                        <div className="space-y-3">
+                            <h3 className="text-xl font-light text-slate-100 tracking-[0.1em] uppercase">Comm-Link <span className="font-bold text-white">Active</span></h3>
+                            <p className="text-[#6dadbe]/60 max-w-xs mx-auto text-xs font-mono uppercase tracking-widest leading-relaxed">
+                                &gt; Awaiting query input for data extraction...
                             </p>
                         </div>
                     </div>
@@ -163,14 +168,14 @@ const ChatInterface = () => {
 
                 {loading && (
                     <div className="flex items-start gap-3 my-6">
-                        <div className="w-8 h-8 rounded-lg bg-cyan-100 flex items-center justify-center flex-shrink-0 animate-bounce cursor-default">
-                            <Sparkles className="w-4 h-4 text-blue-600" />
+                        <div className="w-8 h-8 rounded-lg bg-black border border-[#6dadbe]/40 flex items-center justify-center flex-shrink-0 shadow-[0_0_10px_rgba(109,173,190,0.2)]">
+                            <Sparkles className="w-4 h-4 text-[#6dadbe] animate-pulse" />
                         </div>
-                        <div className="px-5 py-4 rounded-2xl rounded-tl-none bg-white border border-slate-200/80 shadow-sm">
-                            <div className="flex gap-1.5 item-center h-4">
-                                <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                                <span className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                                <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                        <div className="px-5 py-4 rounded-2xl rounded-tl-none bg-black/60 backdrop-blur-md border border-[#6dadbe]/20 shadow-sm">
+                            <div className="flex gap-2 item-center h-4">
+                                <span className="w-2 h-2 bg-[#6dadbe]/50 rounded-sm animate-[pulse_1s_infinite]" style={{ animationDelay: "0ms" }}></span>
+                                <span className="w-2 h-2 bg-[#6dadbe]/80 rounded-sm animate-[pulse_1s_infinite]" style={{ animationDelay: "150ms" }}></span>
+                                <span className="w-2 h-2 bg-[#6dadbe]/50 rounded-sm animate-[pulse_1s_infinite]" style={{ animationDelay: "300ms" }}></span>
                             </div>
                         </div>
                     </div>
@@ -178,30 +183,31 @@ const ChatInterface = () => {
             </div>
 
             {/* Input Area */}
-            <div className="p-5 border-t border-slate-200/60 bg-white/90 backdrop-blur-sm">
+            <div className="p-5 border-t border-white/10 bg-black/90 backdrop-blur-xl z-20 relative">
                 <form onSubmit={handleSendMessage} className="relative flex items-center gap-3">
-                    <div className="relative flex-1 group">
+                    <div className="relative flex-1 group/input">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6dadbe]/50 font-mono text-sm leading-none">&gt;</div>
                         <input
                             type="text"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
-                            placeholder="Ask a follow-up question ..."
-                            className="w-full h-14 pl-5 pr-14 bg-slate-50 border-2 border-slate-100 rounded-2xl text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-blue-400/50 focus:bg-white transition-all duration-300 text-sm shadow-sm"
+                            placeholder="TRANSMIT QUERY..."
+                            className="w-full h-14 pl-10 pr-14 bg-white/[0.03] border border-white/10 rounded-xl text-slate-200 placeholder:text-[#6dadbe]/30 focus:outline-none focus:border-[#6dadbe]/50 focus:bg-white/[0.05] transition-all duration-300 font-mono text-xs uppercase tracking-wider shadow-inner"
                             disabled={loading}
                         />
                         <div className="absolute right-2 top-2">
                             <button
                                 type="submit"
                                 disabled={loading || !message.trim()}
-                                className="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/30 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:scale-100 transition-all duration-200"
+                                className="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-[#6dadbe] hover:border-[#6dadbe]/40 hover:bg-[#6dadbe]/10 active:scale-95 disabled:opacity-50 transition-all duration-300"
                             >
-                                <Send className="w-4 h-4 ml-0.5" strokeWidth={2.5} />
+                                <Send className="w-4 h-4" strokeWidth={2} />
                             </button>
                         </div>
                     </div>
                 </form>
-                <p className="mt-3 text-[10px] text-center text-slate-400 font-medium tracking-wide">
-                    AI can make mistakes. Verify important information.
+                <p className="mt-4 text-[9px] font-mono text-center text-[#6dadbe]/40 uppercase tracking-[0.2em]">
+                    // Warning: Neural outputs may contain hallucinations. Verify critical data. //
                 </p>
             </div>
         </div>

@@ -31,45 +31,45 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         <>
             {/* Mobile Overlay */}
             <div
-                className={`fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+                className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
                     }`}
                 onClick={toggleSidebar}
             />
 
             {/* Sidebar aside */}
             <aside
-                className={`fixed md:sticky top-0 left-0 z-50 w-72 h-screen bg-white border-r border-slate-200/60 transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+                className={`fixed md:sticky top-0 left-0 z-50 w-72 h-screen bg-[#030a0a]/80 backdrop-blur-3xl border-r border-[#6dadbe]/10 transition-transform duration-500 ease-in-out flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
                     }`}
             >
                 {/* Logo and Close button */}
-                <div className="flex items-center justify-between h-16 px-6 border-b border-slate-200/60 shrink-0">
-                    <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 shadow-md shadow-blue-200">
-                            <BrainCircuit className="text-white" size={20} strokeWidth={2.5} />
+                <div className="flex items-center justify-between h-16 px-8 shrink-0 mt-8 mb-6">
+                    <div className="flex items-center gap-4 group">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-2xl bg-[#030a0a] border border-[#6dadbe]/50 text-[#6dadbe] shadow-[0_0_20px_rgba(109,173,190,0.2)] group-hover:rotate-12 transition-all duration-500">
+                            <BrainCircuit size={22} strokeWidth={1.5} />
                         </div>
-                        <h1 className="text-2xl font-black text-slate-800 tracking-[-0.03em] font-display">
+                        <h1 className="text-2xl font-mono font-bold text-white tracking-[0.2em] uppercase">
                             Ignitia
                         </h1>
                     </div>
                     <button
                         onClick={toggleSidebar}
-                        className="md:hidden text-slate-400 hover:text-slate-600 transition-colors"
+                        className="md:hidden text-slate-500 hover:text-slate-300 transition-colors"
                     >
                         <X size={20} />
                     </button>
                 </div>
 
                 {/* Navigation */}
-                <nav className="flex-1 overflow-y-auto py-6 px-4 space-y-1.5 custom-scrollbar">
+                <nav className="flex-1 py-4 px-4 space-y-1 overflow-y-auto custom-scrollbar">
                     {navLinks.map((link) => (
                         <NavLink
                             key={link.to}
                             to={link.to}
                             onClick={() => isSidebarOpen && toggleSidebar()}
                             className={({ isActive }) =>
-                                `group flex items-center gap-3 px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${isActive
-                                    ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg shadow-blue-500/25 scale-[1.02]"
-                                    : "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
+                                `group flex items-center gap-4 px-6 py-4 text-[10px] font-mono font-bold uppercase tracking-[.3em] rounded-2xl transition-all duration-500 ${isActive
+                                    ? "bg-[#6dadbe]/10 text-[#6dadbe] border border-[#6dadbe]/30 shadow-[0_0_20px_rgba(109,173,190,0.1)]"
+                                    : "text-slate-500 border border-transparent hover:bg-white/5 hover:text-[#6dadbe] hover:border-white/10"
                                 }`
                             }
                         >
@@ -77,8 +77,8 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                                 <>
                                     <link.icon
                                         size={18}
-                                        strokeWidth={isActive ? 2.5 : 2}
-                                        className={`transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-110"
+                                        strokeWidth={isActive ? 2 : 1.5}
+                                        className={`transition-colors duration-300 ${isActive ? "text-[#6dadbe]" : "text-slate-500 group-hover:text-[#6dadbe]"
                                             }`}
                                     />
                                     <span>{link.text}</span>
@@ -88,18 +88,17 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
                     ))}
                 </nav>
 
-                {/* Logout Section */}
-                <div className="p-4 border-t border-slate-200/60 shrink-0">
+                <div className="p-6 mb-4 shrink-0 border-t border-white/5">
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all duration-200 group"
+                        className="w-full flex items-center gap-4 px-6 py-4 text-[10px] font-mono font-bold uppercase tracking-[.3em] text-slate-600 hover:text-rose-500 hover:bg-rose-500/10 hover:border-rose-500/30 border border-transparent rounded-2xl transition-all duration-500 group"
                     >
                         <LogOut
                             size={18}
-                            strokeWidth={2}
-                            className="group-hover:-translate-x-1 transition-transform"
+                            strokeWidth={1.5}
+                            className="text-slate-600 group-hover:text-rose-500 transition-colors"
                         />
-                        <span>Logout</span>
+                        <span>Terminate</span>
                     </button>
                 </div>
             </aside>

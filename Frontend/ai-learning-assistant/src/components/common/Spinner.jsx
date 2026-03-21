@@ -2,27 +2,22 @@ import React from 'react';
 
 const Spinner = () => {
     return (
-    <div className="flex items-center justify-center">
-      <svg
-        className="animate-spin h-6 w-6 text-blue-500"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          className="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          strokeWidth="3"
-        ></circle>
-        <path
-          className="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        ></path>
-      </svg>
+    <div className="flex items-center justify-center relative w-16 h-16">
+      {/* Outer Ring */}
+      <div className="absolute inset-0 border-2 border-[#6dadbe]/10 rounded-full" />
+      
+      {/* Scanning Ring 1 */}
+      <div className="absolute inset-2 border-[1.5px] border-t-[#6dadbe] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-[spin_1.5s_linear_infinite]" />
+      
+      {/* Scanning Ring 2 */}
+      <div className="absolute inset-4 border-[1.5px] border-b-[#12768a] border-t-transparent border-r-transparent border-l-transparent rounded-full animate-[spin_2s_linear_reverse_infinite]" />
+      
+      {/* Center Pulse */}
+      <div className="w-2 h-2 bg-[#6dadbe] rounded-full animate-pulse shadow-[0_0_15px_rgba(109,173,190,0.8)]" />
+      
+      {/* Decorative Bits */}
+      <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-3 bg-[#6dadbe]/20 rounded-full" />
+      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-3 bg-[#6dadbe]/20 rounded-full" />
     </div>
   );
 };
