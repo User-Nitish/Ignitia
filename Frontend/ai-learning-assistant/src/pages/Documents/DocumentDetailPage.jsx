@@ -113,30 +113,8 @@ const DocumentDetailPage = () => {
         </Link>
       </div>
 
-      <div className="shrink-0 mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div className="shrink-0 mb-6">
         <PageHeader title={document?.title || "Document Details"} />
-        
-        <div className="flex items-center gap-3">
-          <a
-            href={getPdfUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-mono font-bold text-slate-400 hover:text-[#6dadbe] hover:border-[#6dadbe]/30 transition-all uppercase tracking-widest"
-          >
-            <ExternalLink size={14} />
-            Raw // View
-          </a>
-          <a
-            href={getPdfUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            download={`${document.title}.pdf`}
-            className="flex items-center gap-2 px-4 py-2 bg-[#6dadbe]/10 border border-[#6dadbe]/30 rounded-xl text-[10px] font-mono font-bold text-[#6dadbe] hover:bg-[#6dadbe]/20 hover:border-[#6dadbe] transition-all uppercase tracking-widest shadow-[0_0_15px_rgba(109,173,190,0.1)]"
-          >
-            <Download size={14} />
-            Data // Sync
-          </a>
-        </div>
       </div>
 
       <div className="flex-1 flex flex-col min-h-0 bg-neutral-900/60 backdrop-blur-xl border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-black/50">
