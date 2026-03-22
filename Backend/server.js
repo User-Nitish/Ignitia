@@ -19,6 +19,8 @@ import progressRoutes from "./routes/progressRoutes.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const uploadPath = process.env.UPLOAD_PATH || path.join(__dirname, "uploads");
+
 // Initialize express app
 const app = express();
 
@@ -49,17 +51,10 @@ app.get("/", (req, res) => {
 
 // Static folder for uploads
 app.use("/uploads", (req, res, next) => {
-  const decodedPath = decodeURIComponent(req.url);
-  const fullPath = path.join(__dirname, "uploads", decodedPath);
-  import('fs').then(fs => {
-    if (fs.existsSync(fullPath)) {
-      console.log(`[Static] Serving file: ${fullPath}`);
-    } else {
-      console.warn(`[Static] File not found: ${fullPath}`);
-    }
-  }).catch(() => {});
+  // express.static will handle the actual serving and decoding
+  // We just log for debugging purposes if needed
   next();
-}, express.static(path.join(__dirname, "uploads")));
+}, express.static(uploadPath));
 
 // Routes
 console.log("Registering routes...");

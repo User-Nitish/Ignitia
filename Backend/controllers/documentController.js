@@ -8,7 +8,13 @@ import Quiz from "../models/Quiz.js";
 import { extractTextFromPDF } from "../utils/pdfParser.js";
 import { chunkText } from "../utils/textChunker.js";
 import fs from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
 import mongoose from "mongoose";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadPath = process.env.UPLOAD_PATH || path.join(__dirname, "../uploads");
 
 export const uploadDocument = async (req, res, next) => {
   console.log("Upload request received");
@@ -199,7 +205,17 @@ export const deleteDocument = async (req, res, next) => {
       });
     }
 
-    await fs.unlink(document.filePath).catch(() => { });
+    if (document.filePath) {
+      // document.filePath is expected to be "/uploads/documents/filename.pdf"
+      // We need to resolve this to the actual filesystem path.
+      // Since express handles "/uploads", we remove that prefix and join with uploadPath.
+      const relativePath = document.filePath.replace(/^\/uploads/, '');
+      const fullPath = path.join(uploadPath, relativePath);
+      await fs.unlink(fullPath).catch((err) => { 
+        console.warn(`[Cleanup] Failed to delete file: ${fullPath}`, err.message);
+      });
+    }
+    
     await document.deleteOne();
 
     res.status(200).json({

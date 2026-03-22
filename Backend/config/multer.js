@@ -6,7 +6,9 @@ import fs from 'fs';
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename);
 
-const uploadDir = path.join(_dirname, '../uploads/documents');
+const uploadRoot = process.env.UPLOAD_PATH || path.join(_dirname, '../uploads');
+const uploadDir = path.join(uploadRoot, 'documents');
+
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
