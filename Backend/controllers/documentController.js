@@ -44,7 +44,7 @@ export const uploadDocument = async (req, res, next) => {
     // Upload to Cloudinary
     console.log("Uploading to Cloudinary...");
     const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path, {
-      resource_type: "auto", 
+      resource_type: "image", // PDFs are treated as images for transformation/viewing
       folder: "ignitia/documents",
       use_filename: true,
       unique_filename: true
@@ -65,6 +65,8 @@ export const uploadDocument = async (req, res, next) => {
       fileSize: req.file.size,
       status: "processing"
     });
+
+    console.log("[DB] Document Created. filePath:", document.filePath);
 
     processPDF(document._id, req.file.path).catch(err => {
       console.error("PDF processing error:", err);
