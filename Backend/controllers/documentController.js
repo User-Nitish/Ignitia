@@ -11,6 +11,7 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
+import cloudinary from "../config/cloudinary.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,7 +41,15 @@ export const uploadDocument = async (req, res, next) => {
       });
     }
 
-    const fileUrl = `/uploads/documents/${req.file.filename}`;
+    // Upload to Cloudinary
+    console.log("Uploading to Cloudinary...");
+    const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path, {
+      resource_type: "raw", // Needed for PDFs
+      folder: "ignitia/documents",
+    });
+    console.log("Cloudinary Upload Success:", cloudinaryResponse.secure_url);
+
+    const fileUrl = cloudinaryResponse.secure_url;
 
     const document = await Document.create({
       userId: req.user._id,
@@ -87,6 +96,11 @@ const processPDF = async (documentId, filePath) => {
     await Document.findByIdAndUpdate(documentId, {
       status: "failed"
     });
+  } finally {
+    // Delete local temporary file
+    await fs.unlink(filePath).catch((err) => {
+      console.warn(`[Cleanup] Failed to delete local temp file: ${filePath}`, err.message);
+     });
   }
 };
 
