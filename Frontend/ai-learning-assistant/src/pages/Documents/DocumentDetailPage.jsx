@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import documentsService from '../../services/documentsService';
 import Spinner from '../../components/common/Spinner';
 import toast from 'react-hot-toast';
-import { FileText, Clock, File, MoreVertical, Download } from "lucide-react";
+import { FileText, Clock, File, MoreVertical, Download, ArrowLeft, ExternalLink } from "lucide-react";
 import PageHeader from "../../components/common/PageHeader";
 import Tabs from "../../components/common/Tab";
 import ChatInterface from "../../components/chat/Chatinterface";
