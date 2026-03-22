@@ -44,12 +44,18 @@ export const uploadDocument = async (req, res, next) => {
     // Upload to Cloudinary
     console.log("Uploading to Cloudinary...");
     const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path, {
-      resource_type: "auto", // Better for PDFs than "raw"
+      resource_type: "auto", 
       folder: "ignitia/documents",
+      use_filename: true,
+      unique_filename: true
     });
     console.log("Cloudinary Upload Success:", cloudinaryResponse.secure_url);
 
-    const fileUrl = cloudinaryResponse.secure_url;
+    let fileUrl = cloudinaryResponse.secure_url;
+    // Ensure PDF extension for browser viewer compatibility
+    if (cloudinaryResponse.format === 'pdf' && !fileUrl.toLowerCase().endsWith('.pdf')) {
+      fileUrl += '.pdf';
+    }
 
     const document = await Document.create({
       userId: req.user._id,

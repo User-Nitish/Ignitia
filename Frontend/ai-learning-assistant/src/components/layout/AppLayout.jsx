@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import ParticleBackground from "./ParticleBackground";
 import CustomCursor from "./CustomCursor";
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 const AppLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

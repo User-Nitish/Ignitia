@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import documentsService from '../../services/documentsService';
 import Spinner from '../../components/common/Spinner';
 import toast from 'react-hot-toast';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { FileText, Clock, File, MoreVertical, Download } from "lucide-react";
 import PageHeader from "../../components/common/PageHeader";
 import Tabs from "../../components/common/Tab";
 import ChatInterface from "../../components/chat/Chatinterface";
@@ -85,10 +85,22 @@ const DocumentDetailPage = () => {
           </div>
         </div>
 
-        <div className="flex-1 w-full relative bg-neutral-950" style={{ height: '800px' }}>
+        <div className="flex-1 relative bg-[#030a0a] rounded-2xl overflow-hidden border border-white/5 shadow-2xl group">
+          <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download={`${document.title}.pdf`}
+              className="flex items-center gap-2 px-4 py-2 bg-black/80 backdrop-blur-md border border-white/10 rounded-xl text-xs font-mono font-bold text-white hover:bg-[#6dadbe] hover:border-[#6dadbe] transition-all"
+            >
+              <Download className="w-3.5 h-3.5" />
+              Download PDF
+            </a>
+          </div>
           <iframe
             src={pdfUrl}
-            className="absolute inset-0 w-full h-full border-none invert hue-rotate-180 brightness-90 contrast-125"
+            className="absolute inset-0 w-full h-full border-none opacity-90"
             title="PDF Viewer"
           />
         </div>
