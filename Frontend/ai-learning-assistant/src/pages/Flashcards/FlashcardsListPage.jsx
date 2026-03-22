@@ -6,6 +6,7 @@ import EmptyState from '../../components/common/EmptyState';
 import FlashcardSetCard from '../../components/flashcards/FlashcardSetCard';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
+import { BookOpen } from 'lucide-react';
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
