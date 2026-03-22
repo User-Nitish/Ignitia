@@ -44,7 +44,7 @@ export const uploadDocument = async (req, res, next) => {
     // Upload to Cloudinary
     console.log("Uploading to Cloudinary...");
     const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path, {
-      resource_type: "raw", // Needed for PDFs
+      resource_type: "auto", // Better for PDFs than "raw"
       folder: "ignitia/documents",
     });
     console.log("Cloudinary Upload Success:", cloudinaryResponse.secure_url);
