@@ -48,11 +48,14 @@ const DocumentDetailPage = () => {
     const filePath = document.filePath;
 
     if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
+      console.log("[PDF Viewer] Cloudinary URL:", filePath);
       return filePath;
     }
 
     const baseUrl = process.env.REACT_APP_API_URL || 'https://ignitia-a3oj.onrender.com';
-    return `${baseUrl}${filePath.startsWith('/') ? '' : '/'}${filePath}`;
+    const finalUrl = `${baseUrl}${filePath.startsWith('/') ? '' : '/'}${filePath}`;
+    console.log("[PDF Viewer] Full URL:", finalUrl);
+    return finalUrl;
   };
 
   const renderContent = () => {
@@ -99,8 +102,8 @@ const DocumentDetailPage = () => {
             </a>
           </div>
           <iframe
-            src={pdfUrl}
-            className="absolute inset-0 w-full h-full border-none opacity-90"
+            src={pdfUrl.startsWith('http') ? `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true` : pdfUrl}
+            className="absolute inset-0 w-full h-full border-none"
             title="PDF Viewer"
           />
         </div>
